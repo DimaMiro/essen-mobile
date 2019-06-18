@@ -6,9 +6,8 @@ import {
 } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/DiscoverScreen';
-import LinksScreen from '../screens/ListsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import DiscoverScreen from '../screens/DiscoverScreen';
+import ListsScreen from '../screens/ListsScreen';
 
 const DiscoverStack = createStackNavigator({
   Discover: DiscoverScreen,
