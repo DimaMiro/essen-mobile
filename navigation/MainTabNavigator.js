@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -9,9 +9,19 @@ import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import ListsScreen from '../screens/ListsScreen';
 
-const DiscoverStack = createStackNavigator({
-  Discover: DiscoverScreen,
-});
+import CustomHeaderBar from "../components/CustomHeaderBar";
+
+const DiscoverStack = createStackNavigator(
+  {
+    Discover: DiscoverScreen,
+  },
+  {
+    initialRouteName: 'Discover',
+    defaultNavigationOptions: {
+      header: <CustomHeaderBar title="Discover" subtitle="Your daily inspirations of recipe" />
+    },
+  }
+);
 
 DiscoverStack.navigationOptions = {
   tabBarLabel: 'Discover',

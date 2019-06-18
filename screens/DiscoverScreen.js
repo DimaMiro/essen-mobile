@@ -70,7 +70,12 @@ export default function DiscoverScreen() {
 }
 
 DiscoverScreen.navigationOptions = {
-  header: null,
+  title: "Discover",
+  // headerTitleStyle: { 
+  //   marginTop: 20,
+  //   color: 'white' 
+  // },
+  // headerStyle: { backgroundColor: 'black' },
 };
 
 function DevelopmentModeNotice() {
@@ -111,7 +116,7 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   developmentModeText: {
     marginBottom: 20,
