@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         color: 'white',
-        fontWeight: "500",
         fontSize: 24,
+        fontFamily: 'typo-grotesk'
     },
     headerSubtitle:{
         color: 'white',

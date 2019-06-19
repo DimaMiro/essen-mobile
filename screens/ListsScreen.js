@@ -9,11 +9,6 @@ export default function ListsScreen() {
     </ScrollView>
   );
 }
-
-// ListsScreen.navigationOptions = {
-//   title: 'Links',
-// };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

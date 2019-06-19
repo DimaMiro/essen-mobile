@@ -37,6 +37,7 @@ async function loadResourcesAsync() {
     Font.loadAsync({
       ...Ionicons.font,
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+      'typo-grotesk': require('./assets/fonts/Typo-Grotesk-Bold.otf'),
     }),
   ]);
 }

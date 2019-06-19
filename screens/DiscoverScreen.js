@@ -11,6 +11,10 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import SectionHeader from '../components/SectionHeader';
+import ActiveListThumbnail from '../components/ActiveListThumbnail';
+
+import Colors from '../constants/Colors';
 
 export default function DiscoverScreen() {
   return (
@@ -18,7 +22,9 @@ export default function DiscoverScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
+          <SectionHeader title="Active Lists"/>
+          <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
+        {/* <View style={styles.welcomeContainer}>
           <Image
             source={
               __DEV__
@@ -50,7 +56,7 @@ export default function DiscoverScreen() {
               Help, it didn’t automatically reload!
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );
@@ -104,6 +110,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  contentContainer: {
+    paddingHorizontal: 21,
+    paddingTop: 16,
+  },
+  
+
+
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
@@ -111,9 +124,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: 'center',
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
+  
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
