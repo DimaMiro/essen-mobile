@@ -3,12 +3,12 @@ import { Header } from "react-navigation";
 import { View, Text, Platform, StyleSheet } from "react-native";
 
 export default function CustomHeaderBar(props){
-  return (
+    return (
     <View style={styles.headerView}>
         <Text style={styles.headerTitle}>{props.title}</Text>
         <Text style={styles.headerSubtitle}>{props.subtitle}</Text>
     </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({

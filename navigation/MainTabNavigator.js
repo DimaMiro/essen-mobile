@@ -11,8 +11,7 @@ import ListsScreen from '../screens/ListsScreen';
 
 import CustomHeaderBar from "../components/CustomHeaderBar";
 
-const DiscoverStack = createStackNavigator(
-  {
+const DiscoverStack = createStackNavigator({
     Discover: DiscoverScreen,
   },
   {
@@ -37,9 +36,17 @@ DiscoverStack.navigationOptions = {
   ),
 };
 
-const ListsStack = createStackNavigator({
-  Lists: ListsScreen,
-});
+const ListsStack = createStackNavigator(
+  {
+    Lists: ListsScreen,
+  },
+  {
+    initialRouteName: 'Lists',
+    defaultNavigationOptions: {
+      header: <CustomHeaderBar title="Shopping Lists" subtitle="Your daily inspirations of recipe" />
+    },
+  }
+  );
 
 ListsStack.navigationOptions = {
   tabBarLabel: 'Lists',

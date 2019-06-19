@@ -14,7 +14,7 @@ import { MonoText } from '../components/StyledText';
 
 export default function DiscoverScreen() {
   return (
-    <View style={styles.container}>
+    <View style={styles.bgContainer}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
@@ -52,31 +52,9 @@ export default function DiscoverScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
     </View>
   );
 }
-
-DiscoverScreen.navigationOptions = {
-  title: "Discover",
-  // headerTitleStyle: { 
-  //   marginTop: 20,
-  //   color: 'white' 
-  // },
-  // headerStyle: { backgroundColor: 'black' },
-};
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
@@ -114,7 +92,15 @@ function handleHelpPress() {
 }
 
 const styles = StyleSheet.create({
+  bgContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
   container: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     flex: 1,
     backgroundColor: 'white',
   },
