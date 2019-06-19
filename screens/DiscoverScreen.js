@@ -12,7 +12,8 @@ import {
 
 import SectionHeader from '../components/SectionHeader';
 import ActiveListThumbnail from '../components/ActiveListThumbnail';
-import FeaturedRecipe from '../components/FeaturedRecipe';
+import RecipeThumbnailView from '../components/RecipeThumbnailView';
+import DishesScrollView from '../components/DishesScrollView';
 
 import Colors from '../constants/Colors';
 
@@ -25,11 +26,9 @@ export default function DiscoverScreen() {
           <SectionHeader title="Active Lists"/>
           <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
           <SectionHeader title="Recipe of the Day"/>
-          <FeaturedRecipe/>
+          <RecipeThumbnailView/>
           <SectionHeader title="Trending"/>
-          <View>
-            
-          </View>
+          <DishesScrollView />
 
 
         {/* <View style={styles.welcomeContainer}>
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 21,
   },
-  
 
 
   developmentModeText: {

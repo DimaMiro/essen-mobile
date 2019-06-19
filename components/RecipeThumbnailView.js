@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import ValueItem from '../components/ValueItem';
+import ValueItem from './ValueItem';
 
-export default function FeaturedRecipe(props){
+export default function RecipeThumbnailView(props){
     return (
-        <View style={styles.featuredContainerOuter}>
-            <View style={styles.featuredContainerInner}>
+        <View style={styles.recipeContainerOuter}>
+            <View style={styles.recipeContainerInner}>
                 <Image style={styles.dishImage}></Image>
                 <View style={styles.descContainer}>
                     <View style={styles.titleContainer}>
@@ -24,14 +24,14 @@ export default function FeaturedRecipe(props){
 };
 
 const styles = StyleSheet.create({
-    featuredContainerOuter: {
+    recipeContainerOuter: {
         flex: 1,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 20,
     },
-    featuredContainerInner: {
+    recipeContainerInner: {
         flex: 1,
         overflow: 'hidden',
         borderRadius: 20,

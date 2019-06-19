@@ -14,7 +14,7 @@ export default function App(props) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
+        // onError={handleLoadingError}
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     );
@@ -42,9 +42,9 @@ async function loadResourcesAsync() {
   ]);
 }
 
-function handleLoadingError(error: Error) {
-  console.warn(error);
-}
+// function handleLoadingError(error: Error) {
+//   console.warn(error);
+// }
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
