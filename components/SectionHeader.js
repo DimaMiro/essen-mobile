@@ -10,6 +10,7 @@ export default function SectionHeader(props){
 const styles = StyleSheet.create({
     sectionHeader: {
         flex: 1,
+        marginTop: 16,
         marginBottom: 16,
         textAlign: 'left',
         fontSize: 17,

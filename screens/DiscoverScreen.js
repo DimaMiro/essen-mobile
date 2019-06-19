@@ -10,9 +10,9 @@ import {
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 import SectionHeader from '../components/SectionHeader';
 import ActiveListThumbnail from '../components/ActiveListThumbnail';
+import FeaturedRecipe from '../components/FeaturedRecipe';
 
 import Colors from '../constants/Colors';
 
@@ -24,6 +24,14 @@ export default function DiscoverScreen() {
         contentContainerStyle={styles.contentContainer}>
           <SectionHeader title="Active Lists"/>
           <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
+          <SectionHeader title="Recipe of the Day"/>
+          <FeaturedRecipe/>
+          <SectionHeader title="Trending"/>
+          <View>
+            
+          </View>
+
+
         {/* <View style={styles.welcomeContainer}>
           <Image
             source={
@@ -112,7 +120,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 21,
-    paddingTop: 16,
   },
   
 
