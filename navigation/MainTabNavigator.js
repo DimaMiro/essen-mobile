@@ -10,6 +10,7 @@ import DiscoverScreen from '../screens/DiscoverScreen';
 import ListsScreen from '../screens/ListsScreen';
 
 import CustomHeaderBar from "../components/CustomHeaderBar";
+import Colors from '../constants/Colors';
 
 const DiscoverStack = createStackNavigator({
     Discover: DiscoverScreen,
@@ -24,14 +25,14 @@ const DiscoverStack = createStackNavigator({
 
 DiscoverStack.navigationOptions = {
   tabBarLabel: 'Discover',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+    inactiveTintColor: Colors.tabIconDefault
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name='discover'
     />
   ),
 };
@@ -50,10 +51,14 @@ const ListsStack = createStackNavigator(
 
 ListsStack.navigationOptions = {
   tabBarLabel: 'Lists',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+    inactiveTintColor: Colors.tabIconDefault
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name='list'
     />
   ),
 };
