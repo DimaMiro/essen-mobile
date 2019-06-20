@@ -1,10 +1,19 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import Colors from '../constants/Colors';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../config.json';
+const Icon = createIconSetFromFontello(fontelloConfig);
 
 export default function ValueItem(props){
     return (
         <View style={styles.valueItem}>
-            <Image style={styles.valueImage}></Image>
+            <Icon
+                style={styles.valueImage}
+                name={props.iconName}
+                size={26}
+                color={props.iconName == "rate" ? "#FFC700" : Colors.tintColor}
+            />
             <Text style={styles.value}>{props.value} {props.unit}</Text>
         </View>
     );
@@ -18,10 +27,7 @@ const styles = StyleSheet.create({
         height: 56,
     },
     valueImage: {
-        width: 22,
-        height: 22,
         alignSelf: 'center',
-        backgroundColor: 'gray'
     },
     value: {
         marginTop: 5,

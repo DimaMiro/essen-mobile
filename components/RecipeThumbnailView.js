@@ -13,9 +13,9 @@ export default function RecipeThumbnailView(props){
                         <Text style={styles.subitle}>{props.subtitle}</Text>
                     </View>
                     <View style={styles.valuesContainer}>
-                        <ValueItem value="45" unit="min"/>
-                        <ValueItem value="8,5" unit="rate"/>
-                        <ValueItem value="462" unit="kcal"/>
+                        <ValueItem iconName="time" value="45" unit="min"/>
+                        <ValueItem iconName="rate" value="8,5" unit="rate"/>
+                        <ValueItem iconName="nutrition" value="462" unit="kcal"/>
                     </View>
                 </View>
             </View>
