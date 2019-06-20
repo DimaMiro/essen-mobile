@@ -4,13 +4,13 @@ import ValueItem from './ValueItem';
 
 export default function RecipeThumbnailView(props){
     return (
-        <View style={styles.recipeContainerOuter}>
+        <View style={[styles.recipeContainerOuter, props.marginBottom]}>
             <View style={styles.recipeContainerInner}>
                 <Image style={styles.dishImage}></Image>
                 <View style={styles.descContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Zucchini And Corn Frittata</Text>
-                        <Text style={styles.subitle}>by Rie McClenny</Text>
+                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={styles.subitle}>{props.subtitle}</Text>
                     </View>
                     <View style={styles.valuesContainer}>
                         <ValueItem value="45" unit="min"/>

@@ -18,6 +18,10 @@ import DishesScrollView from '../components/DishesScrollView';
 import Colors from '../constants/Colors';
 
 export default function DiscoverScreen() {
+  let allRecipes = [];
+  for (i=0; i<5; i++){
+    allRecipes.push(<RecipeThumbnailView key={i} title="Zucchini And Corn Frittata" subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
+  }
   return (
     <View style={styles.bgContainer}>
       <ScrollView
@@ -26,10 +30,14 @@ export default function DiscoverScreen() {
           <SectionHeader title="Active Lists"/>
           <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
           <SectionHeader title="Recipe of the Day"/>
-          <RecipeThumbnailView/>
+          <RecipeThumbnailView title="Zucchini And Corn Frittata" subtitle="by Rie McClenny"/>
           <SectionHeader title="Trending"/>
           <DishesScrollView />
-
+          <SectionHeader title="All Recipes"/>
+          <View style={styles.allRecipesContainer}>
+            {allRecipes}
+          </View>
+          
 
         {/* <View style={styles.welcomeContainer}>
           <Image
@@ -120,7 +128,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 21,
   },
+  allRecipesContainer: {
 
+  },
 
   developmentModeText: {
     marginBottom: 20,
