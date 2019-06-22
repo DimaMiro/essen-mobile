@@ -4,6 +4,8 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as firebase from "firebase/app";
+import firebaseConfig from "./firebaseConfig";
 
 import AppNavigator from './navigation/AppNavigator';
 
@@ -14,7 +16,7 @@ export default function App(props) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
-        // onError={handleLoadingError}
+        onError={handleLoadingError}
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     );
@@ -29,6 +31,7 @@ export default function App(props) {
 }
 
 async function loadResourcesAsync() {
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   await Promise.all([
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
@@ -41,11 +44,12 @@ async function loadResourcesAsync() {
       'fontello': require('./assets/fonts/fontello.ttf'),
     }),
   ]);
+  
 }
 
-// function handleLoadingError(error: Error) {
-//   console.warn(error);
-// }
+function handleLoadingError(error) {
+  console.warn(error);
+}
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
