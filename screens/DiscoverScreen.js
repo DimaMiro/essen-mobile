@@ -23,7 +23,7 @@ import Colors from '../constants/Colors';
 
 
 const DiscoverScreen = (props) => {
-  let allRecipes = [],
+  let allRecipes = []
   for (i=0; i<props.recipes; i++){
     allRecipes.push(<RecipeThumbnailView key={i} title={props.recipes[i].recipe.name} subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
     console.log(i)
@@ -41,7 +41,7 @@ const DiscoverScreen = (props) => {
           <DishesScrollView />
           <SectionHeader title="All Recipes"/>
           <View style={styles.allRecipesContainer}>
-            {/* {allRecipes} */}
+            {console.log(props.recipes[0].recipe)}
           </View>
       </ScrollView>
     </View>
