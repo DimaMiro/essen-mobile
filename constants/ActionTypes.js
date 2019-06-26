@@ -1,0 +1,4 @@
+export default {
+    ADD_RECIPE: 'ADD_RECIPE',
+    TOGGLE_LOADING: 'TOGGLE_LOADING',
+};

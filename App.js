@@ -3,14 +3,19 @@ import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import * as firebase from "firebase/app";
+import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig";
+
+import store from './store';
+import { Provider } from 'react-redux';
+import ACTION_TYPES from './constants/ActionTypes';
 
 import AppNavigator from './navigation/AppNavigator';
 
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+  
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
@@ -24,22 +29,35 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-        <AppNavigator />
+        <Provider store={store}>
+          <AppNavigator />
+        </Provider>
       </View>
     );
   }
 }
 
+
+function fetchRecipes() {
+  firebase.database().ref('recipes').once('value', function (snapshot) {
+      Object.entries(snapshot.val()).map(([key, value]) => 
+        store.dispatch({
+          type: ACTION_TYPES.ADD_RECIPE,
+          recipe: value
+        })
+      )
+  });
+}
+
 async function loadResourcesAsync() {
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+  fetchRecipes()
   await Promise.all([
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
       require('./assets/images/robot-prod.png'),
     ]),
     Font.loadAsync({
-      ...Ionicons.font,
-      'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
       'typo-grotesk': require('./assets/fonts/Typo-Grotesk-Bold.otf'),
       'fontello': require('./assets/fonts/fontello.ttf'),
     }),

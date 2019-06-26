@@ -10,6 +10,9 @@ import {
   View,
 } from 'react-native';
 
+// import {store} from '../store';
+import { connect } from 'react-redux';
+
 import SectionHeader from '../components/SectionHeader';
 import ActiveListThumbnail from '../components/ActiveListThumbnail';
 import RecipeThumbnailView from '../components/RecipeThumbnailView';
@@ -17,10 +20,13 @@ import DishesScrollView from '../components/DishesScrollView';
 
 import Colors from '../constants/Colors';
 
-export default function DiscoverScreen() {
-  let allRecipes = [];
-  for (i=0; i<5; i++){
-    allRecipes.push(<RecipeThumbnailView key={i} title="Zucchini And Corn Frittata" subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
+
+
+const DiscoverScreen = (props) => {
+  let allRecipes = [],
+  for (i=0; i<props.recipes; i++){
+    allRecipes.push(<RecipeThumbnailView key={i} title={props.recipes[i].recipe.name} subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
+    console.log(i)
   }
   return (
     <View style={styles.bgContainer}>
@@ -35,82 +41,20 @@ export default function DiscoverScreen() {
           <DishesScrollView />
           <SectionHeader title="All Recipes"/>
           <View style={styles.allRecipesContainer}>
-            {allRecipes}
+            {/* {allRecipes} */}
           </View>
-          
-
-        {/* <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Get started by opening</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.discoverScreenFilename]}>
-            <MonoText>screens/DiscoverScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View> */}
       </ScrollView>
     </View>
   );
 }
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipeState
   }
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
+export default connect(mapStateToProps)(DiscoverScreen)
 
 const styles = StyleSheet.create({
   bgContainer: {
