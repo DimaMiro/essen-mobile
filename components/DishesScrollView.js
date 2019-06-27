@@ -3,14 +3,16 @@ import { ScrollView, View, Image, Text, StyleSheet } from "react-native";
 import DishScrollItem from './DishScrollItem';
 
 export default function DishesScrollView(props){
+    dishesArray = []
+    for (i=0; i<(props.dishes.length); i++){
+      dishesArray.push(<DishScrollItem key={i} dish={props.dishes[i]}/>)
+    }
     return (
         <ScrollView 
             style={styles.dishesScrollView}
             horizontal={true}
           >
-            <DishScrollItem title="Zucchini And Corn Frittata"/>
-            <DishScrollItem title="Pizza Sticks 3-Ways"/>
-            <DishScrollItem title="Shredded Teriyaki Chicken Salad"/>
+            {dishesArray}
           </ScrollView>
     );
 };

@@ -5,9 +5,9 @@ export default function DishScrollItem(props){
     return (
         <View style={styles.dishScrollItemContainerOuter}>
             <View style={styles.dishScrollItemContainerInner}>
-                <Image style={styles.dishImage}></Image>
+                <Image style={styles.dishImage} source={{uri: props.dish["image-url"]}}></Image>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.title}>{props.dish.name}</Text>
                 </View>
             </View>
         </View>

@@ -22,9 +22,15 @@ import Colors from '../constants/Colors';
 
 
 const DiscoverScreen = (props) => {
-  let allRecipes = []
+  let allRecipes = [];
+  const randomRecipe = props.recipes[Math.floor(Math.random()*props.recipes.length)].recipe
+  let recipeOfTheDay = <RecipeThumbnailView recipe={randomRecipe}/>
+  let trending = [];
   for (i=0; i<(props.recipes.length); i++){
-    allRecipes.push(<RecipeThumbnailView key={i} title={props.recipes[i].recipe.name} subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
+    if (props.recipes[i].recipe.info.rate >= 8){
+      trending.push(props.recipes[i].recipe)
+    }
+    allRecipes.push(<RecipeThumbnailView key={i} recipe={props.recipes[i].recipe} marginBottom={{marginBottom: 30}}/>)
   }
   return (
     <View style={styles.bgContainer}>
@@ -34,9 +40,9 @@ const DiscoverScreen = (props) => {
           <SectionHeader title="Active Lists"/>
           <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
           <SectionHeader title="Recipe of the Day"/>
-          <RecipeThumbnailView title="Zucchini And Corn Frittata" subtitle="by Rie McClenny"/>
+          {recipeOfTheDay}
           <SectionHeader title="Trending"/>
-          <DishesScrollView />
+          <DishesScrollView dishes={trending}/>
           <SectionHeader title="All Recipes"/>
           <View style={styles.allRecipesContainer}>
             {allRecipes}

@@ -6,16 +6,16 @@ export default function RecipeThumbnailView(props){
     return (
         <View style={[styles.recipeContainerOuter, props.marginBottom]}>
             <View style={styles.recipeContainerInner}>
-                <Image style={styles.dishImage}></Image>
+                <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>
                 <View style={styles.descContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{props.title}</Text>
-                        <Text style={styles.subitle}>{props.subtitle}</Text>
+                        <Text style={styles.title}>{props.recipe.name}</Text>
+                        <Text style={styles.subitle}>{props.recipe.author}</Text>
                     </View>
                     <View style={styles.valuesContainer}>
-                        <ValueItem iconName="time" value="45" unit="min"/>
-                        <ValueItem iconName="rate" value="8,5" unit="rate"/>
-                        <ValueItem iconName="nutrition" value="462" unit="kcal"/>
+                        <ValueItem iconName="time" value={props.recipe.info["cook-time"]} unit="min"/>
+                        <ValueItem iconName="rate" value={props.recipe.info.rate} unit="rate"/>
+                        <ValueItem iconName="nutrition" value={props.recipe.info.calories} unit="kcal"/>
                     </View>
                 </View>
             </View>
