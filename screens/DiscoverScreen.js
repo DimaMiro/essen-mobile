@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 
-// import {store} from '../store';
 import { connect } from 'react-redux';
 
 import SectionHeader from '../components/SectionHeader';
@@ -24,9 +23,8 @@ import Colors from '../constants/Colors';
 
 const DiscoverScreen = (props) => {
   let allRecipes = []
-  for (i=0; i<props.recipes; i++){
+  for (i=0; i<(props.recipes.length); i++){
     allRecipes.push(<RecipeThumbnailView key={i} title={props.recipes[i].recipe.name} subtitle="by Rie McClenny" marginBottom={{marginBottom: 30}}/>)
-    console.log(i)
   }
   return (
     <View style={styles.bgContainer}>
@@ -41,7 +39,7 @@ const DiscoverScreen = (props) => {
           <DishesScrollView />
           <SectionHeader title="All Recipes"/>
           <View style={styles.allRecipesContainer}>
-            {console.log(props.recipes[0].recipe)}
+            {allRecipes}
           </View>
       </ScrollView>
     </View>

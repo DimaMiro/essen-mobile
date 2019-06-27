@@ -37,9 +37,8 @@ export default function App(props) {
   }
 }
 
-
-function fetchRecipes() {
-  firebase.database().ref('recipes').once('value', function (snapshot) {
+async function fetchRecipes() {
+  await firebase.database().ref('recipes').once('value', function (snapshot) {
       Object.entries(snapshot.val()).map(([key, value]) => 
         store.dispatch({
           type: ACTION_TYPES.ADD_RECIPE,
@@ -51,8 +50,9 @@ function fetchRecipes() {
 
 async function loadResourcesAsync() {
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-  fetchRecipes()
+  
   await Promise.all([
+    fetchRecipes(),
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
       require('./assets/images/robot-prod.png'),
