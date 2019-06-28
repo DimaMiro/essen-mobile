@@ -18,7 +18,6 @@ import PrepStack from '../components/PrepStack';
 import Colors from '../constants/Colors';
 
 const RecipeScreen = (props) => {
-  // console.log(props.navigation.state.params.recipe)
   let recipe = props.navigation.state.params.recipe
   return (
     <View style={styles.bgContainer}>
