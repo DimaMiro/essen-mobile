@@ -12,6 +12,7 @@ import {
 import ValueItem from '../components/ValueItem';
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
+import IngredientsStack from '../components/IngredientsStack';
 
 import Colors from '../constants/Colors';
 
@@ -39,6 +40,7 @@ const RecipeScreen = (props) => {
               <CustomButton title="Add to Shopping List"/>
               <View style={styles.separator}></View>
               <SectionHeader title="Ingredients"/>
+              <IngredientsStack/>
               <View style={styles.separator}></View>
               <SectionHeader title="Preparation"/>
           </View>

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
     },
-        buttonTitle: {
+    buttonTitle: {
         textAlign: 'center',
         fontSize: 17,
         color: 'white',
