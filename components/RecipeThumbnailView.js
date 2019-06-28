@@ -5,7 +5,7 @@ import ValueItem from './ValueItem';
 
 function RecipeThumbnailView(props){
     return (
-        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe')}>
+        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
             <View style={[styles.recipeContainerOuter, props.marginBottom]}>
                 <View style={styles.recipeContainerInner}>
                     <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>

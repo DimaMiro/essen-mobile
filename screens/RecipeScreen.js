@@ -13,36 +13,38 @@ import ValueItem from '../components/ValueItem';
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
 import IngredientsStack from '../components/IngredientsStack';
+import PrepStack from '../components/PrepStack';
 
 import Colors from '../constants/Colors';
 
-
-
 const RecipeScreen = (props) => {
+  // console.log(props.navigation.state.params.recipe)
+  let recipe = props.navigation.state.params.recipe
   return (
     <View style={styles.bgContainer}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-          <Image style={styles.dishImage}></Image>
+          <Image style={styles.dishImage} source={{uri: recipe["image-url"]}}></Image>
           <View style={styles.descContainer}>
               <View style={styles.valuesContainer}>
-                  <ValueItem iconName="time" value="20" unit="min"/>
-                  <ValueItem iconName="rate" value="20" unit="rate"/>
-                  <ValueItem iconName="nutrition" value="20" unit="kcal"/>
+                <ValueItem iconName="time" value={recipe.info["cook-time"]} unit="min"/>
+                <ValueItem iconName="rate" value={recipe.info.rate} unit="rate"/>
+                <ValueItem iconName="nutrition" value={recipe.info.calories} unit="kcal"/>
               </View>
               <View style={styles.separator}></View>
               <View style={styles.titleContainer}>
-                  <Text style={styles.title}>Title</Text>
-                  <Text style={styles.subitle}>Author</Text>
+                <Text style={styles.title}>{recipe.name}</Text>
+                <Text style={styles.subitle}>{recipe.author}</Text>
               </View>
               <View style={styles.separator}></View>
               <CustomButton title="Add to Shopping List"/>
               <View style={styles.separator}></View>
               <SectionHeader title="Ingredients"/>
-              <IngredientsStack/>
+              <IngredientsStack ingredients={recipe.ingredients}/>
               <View style={styles.separator}></View>
               <SectionHeader title="Preparation"/>
+              <PrepStack preparation={recipe.preparation}/>
           </View>
       </ScrollView>
     </View>
@@ -107,17 +109,4 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: 'rgba(0,0,0,0.4)',
     },
-    buttonContainer: {
-      flex: 1,
-      backgroundColor: Colors.primaryButtonColor,
-      height: 56,
-      borderRadius: 10,
-      justifyContent: 'center',
-    },
-    buttonTitle: {
-      textAlign: 'center',
-      fontSize: 17,
-      color: 'white',
-      fontFamily: "typo-grotesk"
-    }
   });
