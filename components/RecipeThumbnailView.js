@@ -1,27 +1,32 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, TouchableHighlight, Image, Text, StyleSheet } from "react-native";
+import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
 
-export default function RecipeThumbnailView(props){
+function RecipeThumbnailView(props){
     return (
-        <View style={[styles.recipeContainerOuter, props.marginBottom]}>
-            <View style={styles.recipeContainerInner}>
-                <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>
-                <View style={styles.descContainer}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{props.recipe.name}</Text>
-                        <Text style={styles.subitle}>{props.recipe.author}</Text>
-                    </View>
-                    <View style={styles.valuesContainer}>
-                        <ValueItem iconName="time" value={props.recipe.info["cook-time"]} unit="min"/>
-                        <ValueItem iconName="rate" value={props.recipe.info.rate} unit="rate"/>
-                        <ValueItem iconName="nutrition" value={props.recipe.info.calories} unit="kcal"/>
+        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe')}>
+            <View style={[styles.recipeContainerOuter, props.marginBottom]}>
+                <View style={styles.recipeContainerInner}>
+                    <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>
+                    <View style={styles.descContainer}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>{props.recipe.name}</Text>
+                            <Text style={styles.subitle}>{props.recipe.author}</Text>
+                        </View>
+                        <View style={styles.valuesContainer}>
+                            <ValueItem iconName="time" value={props.recipe.info["cook-time"]} unit="min"/>
+                            <ValueItem iconName="rate" value={props.recipe.info.rate} unit="rate"/>
+                            <ValueItem iconName="nutrition" value={props.recipe.info.calories} unit="kcal"/>
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableHighlight>
+        
     );
 };
+export default withNavigation(RecipeThumbnailView)
 
 const styles = StyleSheet.create({
     recipeContainerOuter: {

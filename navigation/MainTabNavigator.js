@@ -7,19 +7,33 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
+import RecipeScreen from '../screens/RecipeScreen';
 import ListsScreen from '../screens/ListsScreen';
 
 import CustomHeaderBar from "../components/CustomHeaderBar";
 import Colors from '../constants/Colors';
+import { defaultProps } from 'recompose';
 
 const DiscoverStack = createStackNavigator({
-    Discover: DiscoverScreen,
+    Discover: {
+      screen: DiscoverScreen,
+      navigationOptions: {
+        header: props => <CustomHeaderBar isRoot={true} title="Discover" subtitle="Your daily inspirations of recipe"/>
+        // header: props => <CustomHeaderBar {...props}/>
+      }
+    },
+    Recipe: {
+      screen: RecipeScreen,
+      navigationOptions: {
+        header: props => <CustomHeaderBar isRoot={false} title="Recipe" subtitle="Your daily inspirations of recipe"/>
+      }
+    },
   },
   {
     initialRouteName: 'Discover',
-    defaultNavigationOptions: {
-      header: <CustomHeaderBar title="Discover" subtitle="Your daily inspirations of recipe" />
-    },
+    // defaultNavigationOptions: {
+    //   header: <CustomHeaderBar title="Discover" subtitle="Your daily inspirations of recipe" />
+    // },
   }
 );
 
