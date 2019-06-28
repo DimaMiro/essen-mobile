@@ -19,7 +19,6 @@ const DiscoverStack = createStackNavigator({
       screen: DiscoverScreen,
       navigationOptions: {
         header: props => <CustomHeaderBar isRoot={true} title="Discover" subtitle="Your daily inspirations of recipe"/>
-        // header: props => <CustomHeaderBar {...props}/>
       }
     },
     Recipe: {
@@ -31,9 +30,6 @@ const DiscoverStack = createStackNavigator({
   },
   {
     initialRouteName: 'Discover',
-    // defaultNavigationOptions: {
-    //   header: <CustomHeaderBar title="Discover" subtitle="Your daily inspirations of recipe" />
-    // },
   }
 );
 
@@ -53,13 +49,15 @@ DiscoverStack.navigationOptions = {
 
 const ListsStack = createStackNavigator(
   {
-    Lists: ListsScreen,
+    Lists: {
+      screen: ListsScreen,
+      navigationOptions: {
+        header: props => <CustomHeaderBar isRoot={true} title="Shopping Lists" subtitle="Your daily inspirations of recipe"/>
+      }
+    },
   },
   {
     initialRouteName: 'Lists',
-    defaultNavigationOptions: {
-      header: <CustomHeaderBar title="Shopping Lists" subtitle="Your daily inspirations of recipe" />
-    },
   }
   );
 

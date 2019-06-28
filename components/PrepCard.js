@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     prepContainer: {
         flex: 1,
         flexDirection: "row",
-        padding: 16,
+        padding: 20,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
         marginBottom: 20,
       },
       prepStep: {
+        flex: 1,
         textAlign: 'left',
-        marginRight: 14,
         fontSize: 18,
         color: Colors.accentColor,
         fontFamily: "typo-grotesk"
       },
       prepDesc: {
+        flex: 8,
         fontSize: 17,
         color: 'black',
-        marginRight: 14,
       },
 })
