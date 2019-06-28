@@ -11,8 +11,8 @@ export default function ValueItem(props){
             <Icon
                 style={styles.valueImage}
                 name={props.iconName}
-                size={26}
-                color={props.iconName == "rate" ? "#FFC700" : Colors.tintColor}
+                size={34}
+                color={props.iconName == "rate" ? "#FFC700" : Colors.tabIconDefault}
             />
             <Text style={styles.value}>{props.value} {props.unit}</Text>
         </View>
