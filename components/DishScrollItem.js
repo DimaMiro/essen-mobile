@@ -1,18 +1,24 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { withNavigation } from 'react-navigation';
+import { View, TouchableHighlight, Text, Image, StyleSheet } from "react-native";
 
-export default function DishScrollItem(props){
+function DishScrollItem(props){
     return (
-        <View style={styles.dishScrollItemContainerOuter}>
-            <View style={styles.dishScrollItemContainerInner}>
-                <Image style={styles.dishImage} source={{uri: props.dish["image-url"]}}></Image>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{props.dish.name}</Text>
+        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe', {recipe: props.dish})}>
+            <View style={styles.dishScrollItemContainerOuter}>
+                <View style={styles.dishScrollItemContainerInner}>
+                    <Image style={styles.dishImage} source={{uri: props.dish["image-url"]}}></Image>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>{props.dish.name}</Text>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableHighlight>
+        
     );
 };
+
+export default withNavigation(DishScrollItem)
 
 const styles = StyleSheet.create({
     dishScrollItemContainerOuter: {
@@ -36,11 +42,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray',
     },
     titleContainer: {
-        height: '30%',
+        flex: 1,
+        height: 65,
         paddingTop: 6,
         paddingHorizontal: 12,
         paddingBottom: 16,
-        overflow: 'hidden',
     },
     title: {
         textAlign: 'left',
