@@ -9,6 +9,7 @@ export default function DishesScrollView(props){
     }
     return (
         <ScrollView 
+            showsHorizontalScrollIndicator={false}
             style={styles.dishesScrollView}
             horizontal={true}
           >
