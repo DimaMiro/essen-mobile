@@ -1,26 +1,17 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
-  Button,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
 import { connect } from 'react-redux';
 
 import SectionHeader from '../components/SectionHeader';
-import ActiveListThumbnail from '../components/ActiveListThumbnail';
+import ListThumbnail from '../components/ListThumbnail';
 import RecipeThumbnailView from '../components/RecipeThumbnailView';
 import DishesScrollView from '../components/DishesScrollView';
-
-import Colors from '../constants/Colors';
-
-
 
 const DiscoverScreen = (props) => {
   let allRecipes = [];
@@ -31,7 +22,7 @@ const DiscoverScreen = (props) => {
     if (props.recipes[i].recipe.info.rate >= 8){
       trending.push(props.recipes[i].recipe)
     }
-    allRecipes.push(<RecipeThumbnailView key={i} recipe={props.recipes[i].recipe} marginBottom={{marginBottom: 30}}/>)
+    allRecipes.push(<RecipeThumbnailView key={i} recipe={props.recipes[i].recipe} marginBottom={30}/>)
   }
   return (
     <View style={styles.bgContainer}>
@@ -39,7 +30,7 @@ const DiscoverScreen = (props) => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
           <SectionHeader title="Active Lists"/>
-          <ActiveListThumbnail title="Weekend's shopping" dishes="7" items="12"/>
+          <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/>
           <SectionHeader title="Recipe of the Day"/>
           {recipeOfTheDay}
           <SectionHeader title="Trending"/>

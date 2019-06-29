@@ -2,13 +2,19 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import Colors from '../constants/Colors';
 
-export default function ActiveListThumbnail(props){
+export default function ListThumbnail(props){
+    let listBg
+    if (props.isActive){
+      listBg = Colors.cardColors[Math.floor(Math.random()*Colors.cardColors.length)]
+    } else {
+      listBg = 'white'
+    }
     return (
-        <View style={styles.activeListContainerOuter}>
-            <View style={styles.activeListContainerInner}>
-                <View style={styles.activeListTitleContainer}>
-                    <Text style={styles.activeListTitle}>{props.title}</Text>
-                    <Text style={styles.activeListSubitle}>{props.dishes} dishes · {props.items} items</Text>
+        <View style={[styles.listContainerOuter, {marginBottom: props.marginBottom}]}>
+            <View style={[styles.listContainerInner, {backgroundColor: listBg}]}>
+                <View style={styles.listTitleContainer}>
+                    <Text style={styles.listTitle}>{props.title}</Text>
+                    <Text style={styles.listSubitle}>{props.dishes} dishes · {props.items} items</Text>
                 </View>
                 
                 <View style={styles.dishImageContainer}>
@@ -22,14 +28,14 @@ export default function ActiveListThumbnail(props){
 };
 
 const styles = StyleSheet.create({
-    activeListContainerOuter: {
+    listContainerOuter: {
       flex: 1,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 20,
     },
-    activeListContainerInner: {
+    listContainerInner: {
       flex: 1,
       flexDirection: 'row',
       overflow: 'hidden',
@@ -37,19 +43,18 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
       paddingTop: 16,
       paddingBottom: 16,
-      backgroundColor: Colors.cardColors[Math.floor(Math.random()*Colors.cardColors.length)],
     },
-    activeListTitleContainer: {
+    listTitleContainer: {
       flexDirection: 'column',
       flexBasis: "45%"
     },
-    activeListTitle: {
+    listTitle: {
       textAlign: 'left',
       fontSize: 18,
       color: 'black',
       fontFamily: "typo-grotesk"
     },
-    activeListSubitle: {
+    listSubitle: {
       marginTop: 4,
       textAlign: 'left',
       fontSize: 13,
