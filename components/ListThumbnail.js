@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { TouchableHighlight, View, Text, Image, StyleSheet } from "react-native";
+import { withNavigation } from 'react-navigation';
 import Colors from '../constants/Colors';
 
-export default function ListThumbnail(props){
+function ListThumbnail(props){
     let listBg
     if (props.isActive){
       listBg = Colors.cardColors[Math.floor(Math.random()*Colors.cardColors.length)]
@@ -10,6 +11,7 @@ export default function ListThumbnail(props){
       listBg = 'white'
     }
     return (
+      <TouchableHighlight onPress={() => props.navigation.navigate('SingleList')}>
         <View style={[styles.listContainerOuter, {marginBottom: props.marginBottom}]}>
             <View style={[styles.listContainerInner, {backgroundColor: listBg}]}>
                 <View style={styles.listTitleContainer}>
@@ -24,8 +26,10 @@ export default function ListThumbnail(props){
                 </View>
             </View>
         </View>
+      </TouchableHighlight>
     );
 };
+export default withNavigation(ListThumbnail)
 
 const styles = StyleSheet.create({
     listContainerOuter: {

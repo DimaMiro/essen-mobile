@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Platform } from 'react-native';
+// import { View, Text, Platform } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -9,22 +9,23 @@ import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import RecipeScreen from '../screens/RecipeScreen';
 import ListsScreen from '../screens/ListsScreen';
+import SingleListScreen from '../screens/SingleListScreen';
 
 import CustomHeaderBar from "../components/CustomHeaderBar";
 import Colors from '../constants/Colors';
-import { defaultProps } from 'recompose';
+// import { defaultProps } from 'recompose';
 
 const DiscoverStack = createStackNavigator({
     Discover: {
       screen: DiscoverScreen,
       navigationOptions: {
-        header: props => <CustomHeaderBar isRoot={true} title="Discover" subtitle="Your daily inspirations of recipe"/>
+        header: () => <CustomHeaderBar isRoot={true} title="Discover" subtitle="Your daily inspirations of recipe"/>
       }
     },
     Recipe: {
       screen: RecipeScreen,
       navigationOptions: {
-        header: props => <CustomHeaderBar isRoot={false} title="Recipe" subtitle="Your daily inspirations of recipe"/>
+        header: () => <CustomHeaderBar isRoot={false} title="Recipe" subtitle="Your daily inspirations of recipe"/>
       }
     },
   },
@@ -52,7 +53,13 @@ const ListsStack = createStackNavigator(
     Lists: {
       screen: ListsScreen,
       navigationOptions: {
-        header: props => <CustomHeaderBar isRoot={true} title="Shopping Lists" subtitle="Your daily inspirations of recipe"/>
+        header: () => <CustomHeaderBar isRoot={true} title="Shopping Lists" subtitle="Your daily inspirations of recipe"/>
+      }
+    },
+    SingleList: {
+      screen: SingleListScreen,
+      navigationOptions: {
+        header: () => <CustomHeaderBar isRoot={false} title="List" subtitle="Your daily inspirations of recipe"/>
       }
     },
   },
