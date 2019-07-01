@@ -2,18 +2,22 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 
 import SectionHeader from '../components/SectionHeader';
+import DishesScrollView from '../components/DishesScrollView';
 
 export default function SingleListScreen() {
-  return (
-    <View style={styles.bgContainer}>
-        <ScrollView
-            style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
-        </ScrollView>
-    </View>
-    
-    
-  );
+    return (
+        <View style={styles.bgContainer}>
+            <ScrollView
+                style={styles.container}
+                contentContainerStyle={styles.contentContainer}>
+                <SectionHeader title="Dishes (n)"/>
+                <SectionHeader title="Items (n)"/>
+                
+            </ScrollView>
+        </View>
+        
+        
+    );
 }
 const styles = StyleSheet.create({
   bgContainer: {
