@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
 
 function RecipeThumbnailView(props){
+    
     return (
         <TouchableHighlight onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
             <View style={[styles.recipeContainerOuter, {marginBottom: props.marginBottom}]}>

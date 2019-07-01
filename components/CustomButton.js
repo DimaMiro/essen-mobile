@@ -4,9 +4,9 @@ import Colors from '../constants/Colors';
 
 export default function CustomButton(props){
     return (
-        <TouchableOpacity>
-            <View style={styles.buttonContainer}>
-                <Text style={styles.buttonTitle}>{props.title}</Text>
+        <TouchableOpacity onPress={props.onPressAction}>
+            <View style={[styles.buttonContainer, props.isPrimary ? styles.primaryStyle : styles.secondaryStyle]}>
+                <Text style={props.isPrimary ? styles.primaryButtonTitle : styles.secondaryButtonTitle}>{props.title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -14,16 +14,29 @@ export default function CustomButton(props){
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        flex: 1,
-        backgroundColor: Colors.primaryButtonColor,
         height: 56,
         borderRadius: 10,
         justifyContent: 'center',
     },
-    buttonTitle: {
+    primaryButtonTitle: {
+        color: 'white',
         textAlign: 'center',
         fontSize: 17,
-        color: 'white',
         fontFamily: "typo-grotesk"
-    }
+    },
+    secondaryButtonTitle: {
+        color: 'black',
+        textAlign: 'center',
+        fontSize: 17,
+        fontFamily: "typo-grotesk"
+    },
+    primaryStyle: {
+        backgroundColor: Colors.primaryButtonColor,
+    },
+    secondaryStyle: {
+        backgroundColor: 'white',
+        borderColor: Colors.tabIconDefault,
+        borderWidth: 2,
+    },
+    
 })
