@@ -11,17 +11,21 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+
+// import { connect } from 'react-redux';
+// import store from './store';
+// import { Provider } from 'react-redux';
+// import ACTION_TYPES from './constants/ActionTypes';
+
 import ValueItem from '../components/ValueItem';
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
 import IngredientsStack from '../components/IngredientsStack';
 import PrepStack from '../components/PrepStack';
 
-import Colors from '../constants/Colors';
+import CustomModal from '../components/CustomModal';
 
-import { createIconSetFromFontello } from 'react-native-vector-icons';
-import fontelloConfig from '../config.json';
-const Icon = createIconSetFromFontello(fontelloConfig);
+import Colors from '../constants/Colors';
 
 const RecipeScreen = (props) => {
   
@@ -30,41 +34,7 @@ const RecipeScreen = (props) => {
   let recipe = props.navigation.state.params.recipe
   return (
     <View style={styles.bgContainer}>
-      <Modal
-          visible={isModalVisible}
-          transparent={true}
-          animationType={'slide'}
-          onRequestClose={() => handleCloseModal(setModalVisiblity)}
-      >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity
-            style={styles.modalOverlay}
-            onPress={() => handleCloseModal(setModalVisiblity)}
-          />
-          <View style={styles.modalBgContainer}>
-            <View style={styles.modalContentContainer}>
-              <View style={styles.modalHeaderContainer}>
-                <SectionHeader title="Save to"/>
-                <TouchableOpacity onPress={() => {console.log('ADD PRESSED')}}>
-                  <Icon
-                    style={styles.valueImage}
-                    name='add'
-                    size={34}
-                    color='black'
-                  />
-                </TouchableOpacity>
-              </View>
-              
-              <View style={[styles.separator, {marginTop: 0}]}></View>
-              <View style = {styles.emptyStateBox}>
-                <View style = {styles.emptyStateImage}></View>
-                <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
-              </View>
-              <CustomButton isPrimary={false} title="Cancel" onPressAction={()=>handleCloseModal(setModalVisiblity)}/>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <CustomModal displayModal={isModalVisible} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
@@ -156,46 +126,4 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: 'rgba(0,0,0,0.4)',
     },
-    modalContainer: {
-      flex: 1,
-      flexDirection: 'column',
-    },
-    modalOverlay: {
-      flex: 1,
-      // height: '50%',
-      backgroundColor: 'rgba(0,0,0,0.5)',
-    },
-    modalBgContainer: {
-      // height: '50%',
-      height: 457,
-      backgroundColor: 'white',
-    },
-    modalContentContainer: {
-      flex: 1,
-      paddingHorizontal: 21,
-    },
-    modalHeaderContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-
-    },
-    emptyStateBox: {
-      width: '90%',
-      alignSelf: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: 40,
-    },
-    emptyStateImage: {
-      width: 160,
-      height: 160,
-      marginBottom: 20,
-      backgroundColor: Colors.tabIconDefault
-    },
-    paragraph: {
-      textAlign: 'center',
-      fontSize: 17,
-      color: 'rgba(0,0,0,0.4)',
-    }
   });
