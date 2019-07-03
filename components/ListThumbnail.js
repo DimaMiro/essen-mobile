@@ -33,14 +33,12 @@ export default withNavigation(ListThumbnail)
 
 const styles = StyleSheet.create({
     listContainerOuter: {
-      flex: 1,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 20,
     },
     listContainerInner: {
-      flex: 1,
       flexDirection: 'row',
       overflow: 'hidden',
       borderRadius: 20,

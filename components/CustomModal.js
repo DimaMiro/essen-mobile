@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Dimensions from 'Dimensions';
 import {
   TextInput,
   Keyboard,
@@ -22,6 +21,7 @@ import {
 
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
+import ListThumbnail from '../components/ListThumbnail';
 import KeyboardListener from 'react-native-keyboard-listener';
 
 import Colors from '../constants/Colors';
@@ -31,10 +31,11 @@ import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 const CustomModal = (props) => {
-    let lists = []
+    const [listArray, setListArray] = useState([]);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const [isKeyboardVisible, setKeyboardVisiblity] = useState(false);
     const [isAddInputVisible, setAddInputVisiblity] = useState(false);
+    
     return (
         <Modal
           visible={props.displayModal}
@@ -79,33 +80,45 @@ const CustomModal = (props) => {
                   <KeyboardListener
                     onWillShow={(e) => {
                       setKeyboardVisiblity(true); 
-                      setKeyboardHeight(e.endCoordinates.height)
-                      console.log(e.endCoordinates.height, "SHOWN", isKeyboardVisible)}}
+                      setKeyboardHeight(e.endCoordinates.height)}}
                     onWillHide={() => {
-                      let newSize = Dimensions.get('window').height
-                      setKeyboardVisiblity(false); 
-                      console.log("HIDE", isKeyboardVisible)}}
+                      setKeyboardVisiblity(false)}}
                   />
-                  <TextInput style = {styles.addInput} onSubmitEditing={Keyboard.dismiss}/>
+                  <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(event.nativeEvent.text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity)}/>
                 </View>  
               :
-              lists.length === 0 ?
+              listArray.length === 0 ?
               <View style = {styles.emptyStateBox}>
                 <View style = {styles.emptyStateImage}></View>
                 <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
               </View>
               :
               <View style = {styles.listContainer}>
-
+                <ScrollView style = {styles.listScrollView}>
+                  {listArray.map((item, id) => {
+                    return <ListThumbnail key={id} isActive={false} title={item} dishes="7" items="12" marginBottom={16}/>
+                  })}
+                </ScrollView>
               </View>
               }
-              <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
+              {
+                isAddInputVisible ? 
+                <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
+                :
+                <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
+              }
             </View>
           </View>
         </View>
       </Modal>
     )
 }
+function handleInputSubmit(text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity){
+  setListArray([...listArray, text])
+  setAddInputVisiblity(false)
+  setKeyboardVisiblity(false)
+}
+
 function handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, closeModalFunction){
   setAddInputVisiblity(false)
   setKeyboardVisiblity(false)
@@ -129,12 +142,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)',
       },
       modalBgContainer: {
-        height: 457,
+        flex: 0,
         backgroundColor: 'white',
       },
       modalContentContainer: {
-        flex: 1,
         paddingHorizontal: 21,
+        paddingBottom: 50,
       },
       modalHeaderContainer: {
         flexDirection: 'row',
@@ -186,8 +199,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
       },
       listContainer: {
-        width: 160,
-        height: 250,
-        backgroundColor: 'red',
+        maxHeight: '80%',
+        width: '100%',
       },
+      listScrollView: {
+        overflow: 'visible',
+      }
 })
