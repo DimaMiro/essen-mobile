@@ -47,18 +47,30 @@ const CustomModal = (props) => {
             style={styles.modalOverlay}
             onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}
           />
-          <View style={isKeyboardVisible? [styles.modalBgContainer, {height: 410+keyboardHeight}] : styles.modalBgContainer}>
+          <View style={isKeyboardVisible? [styles.modalBgContainer, {height: 250+keyboardHeight}] : styles.modalBgContainer}>
             <View style={styles.modalContentContainer}>
               <View style={styles.modalHeaderContainer}>
-                <SectionHeader title="Save to"/>
-                <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
-                  <Icon
-                    style={styles.valueImage}
-                    name='add'
-                    size={34}
-                    color='black'
-                  />
-                </TouchableOpacity>
+                <SectionHeader title={isAddInputVisible ? 'New shopping list' : 'Save to'}/>
+                {isAddInputVisible ? 
+                  <TouchableOpacity onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}>
+                    <Icon
+                      style={styles.valueImage}
+                      name='close'
+                      size={34}
+                      color='black'
+                    />
+                  </TouchableOpacity>
+                  : 
+                  <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
+                    <Icon
+                      style={styles.valueImage}
+                      name='add'
+                      size={34}
+                      color='black'
+                    />
+                  </TouchableOpacity>
+                  }
+                
               </View>
               
               <View style={[styles.separator, {marginTop: 0}]}></View>
@@ -66,7 +78,6 @@ const CustomModal = (props) => {
                 <View style = {styles.addInputContainer}>
                   <KeyboardListener
                     onWillShow={(e) => {
-                      // let newSize = Dimensions.get('window').height - e.endCoordinates.height
                       setKeyboardVisiblity(true); 
                       setKeyboardHeight(e.endCoordinates.height)
                       console.log(e.endCoordinates.height, "SHOWN", isKeyboardVisible)}}
@@ -88,7 +99,6 @@ const CustomModal = (props) => {
 
               </View>
               }
-              
               <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
             </View>
           </View>
@@ -156,17 +166,24 @@ const styles = StyleSheet.create({
         color: 'rgba(0,0,0,0.4)',
       },
       addInputContainer: {
-        width: 160,
-        height: 250,
+        width: '100%',
+        paddingVertical: 20,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'green',
       },
       addInput: {
+        textAlign: 'center',
+        fontSize: 18,
+        fontFamily: "typo-grotesk",
         width: '100%',
-        height: 40,
-        backgroundColor: 'red',
+        height: 64,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 20,
+        borderRadius: 20,
+        backgroundColor: 'white',
       },
       listContainer: {
         width: 160,
