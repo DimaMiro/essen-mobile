@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import Dimensions from 'Dimensions';
 import {
+  TextInput,
+  Keyboard,
   Image,
   Modal,
   Button,
@@ -19,6 +22,7 @@ import {
 
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
+import KeyboardListener from 'react-native-keyboard-listener';
 
 import Colors from '../constants/Colors';
 
@@ -27,6 +31,10 @@ import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 const CustomModal = (props) => {
+    let lists = []
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [isKeyboardVisible, setKeyboardVisiblity] = useState(false);
+    const [isAddInputVisible, setAddInputVisiblity] = useState(false);
     return (
         <Modal
           visible={props.displayModal}
@@ -37,13 +45,13 @@ const CustomModal = (props) => {
         <View style={styles.modalContainer}>
           <TouchableOpacity
             style={styles.modalOverlay}
-            onPress={() => props.closeModal()}
+            onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}
           />
-          <View style={styles.modalBgContainer}>
+          <View style={isKeyboardVisible? [styles.modalBgContainer, {height: 410+keyboardHeight}] : styles.modalBgContainer}>
             <View style={styles.modalContentContainer}>
               <View style={styles.modalHeaderContainer}>
                 <SectionHeader title="Save to"/>
-                <TouchableOpacity onPress={() => {console.log('add')}}>
+                <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
                   <Icon
                     style={styles.valueImage}
                     name='add'
@@ -54,16 +62,49 @@ const CustomModal = (props) => {
               </View>
               
               <View style={[styles.separator, {marginTop: 0}]}></View>
+              {isAddInputVisible ?
+                <View style = {styles.addInputContainer}>
+                  <KeyboardListener
+                    onWillShow={(e) => {
+                      // let newSize = Dimensions.get('window').height - e.endCoordinates.height
+                      setKeyboardVisiblity(true); 
+                      setKeyboardHeight(e.endCoordinates.height)
+                      console.log(e.endCoordinates.height, "SHOWN", isKeyboardVisible)}}
+                    onWillHide={() => {
+                      let newSize = Dimensions.get('window').height
+                      setKeyboardVisiblity(false); 
+                      console.log("HIDE", isKeyboardVisible)}}
+                  />
+                  <TextInput style = {styles.addInput} onSubmitEditing={Keyboard.dismiss}/>
+                </View>  
+              :
+              lists.length === 0 ?
               <View style = {styles.emptyStateBox}>
                 <View style = {styles.emptyStateImage}></View>
                 <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
               </View>
-              <CustomButton isPrimary={false} title="Cancel" onPressAction={() => props.closeModal()}/>
+              :
+              <View style = {styles.listContainer}>
+
+              </View>
+              }
+              
+              <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
             </View>
           </View>
         </View>
       </Modal>
     )
+}
+function handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, closeModalFunction){
+  setAddInputVisiblity(false)
+  setKeyboardVisiblity(false)
+  closeModalFunction()
+}
+
+function handleToggleAddInput(addInputVisibility, setAddInputVisiblity){
+  console.log("ADD PRESSED")
+  setAddInputVisiblity(!addInputVisibility);
 }
 
 export default CustomModal
@@ -91,6 +132,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
   
       },
+      separator: {
+        marginVertical: 20,
+        backgroundColor: Colors.tabIconDefault,
+        height: 1,
+      },
       emptyStateBox: {
         width: '90%',
         alignSelf: 'center',
@@ -108,5 +154,23 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 17,
         color: 'rgba(0,0,0,0.4)',
-      }
+      },
+      addInputContainer: {
+        width: 160,
+        height: 250,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'green',
+      },
+      addInput: {
+        width: '100%',
+        height: 40,
+        backgroundColor: 'red',
+      },
+      listContainer: {
+        width: 160,
+        height: 250,
+        backgroundColor: 'red',
+      },
 })
