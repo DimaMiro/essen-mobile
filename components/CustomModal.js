@@ -14,10 +14,9 @@ import {
   View,
 } from 'react-native';
 
-// import { connect } from 'react-redux';
-// import store from './store';
-// import { Provider } from 'react-redux';
-// import ACTION_TYPES from './constants/ActionTypes';
+import { connect } from 'react-redux';
+import ACTION_TYPES from '../constants/ActionTypes';
+import * as listAction from '../actions'
 
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
@@ -84,7 +83,7 @@ const CustomModal = (props) => {
                     onWillHide={() => {
                       setKeyboardVisiblity(false)}}
                   />
-                  <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(event.nativeEvent.text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity)}/>
+                  <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity)}/>
                 </View>  
               :
               listArray.length === 0 ?
@@ -113,8 +112,10 @@ const CustomModal = (props) => {
       </Modal>
     )
 }
-function handleInputSubmit(text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity){
-  setListArray([...listArray, text])
+function handleInputSubmit(addList, text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity){
+  // setListArray([...listArray, text])
+
+  addList(text)
   setAddInputVisiblity(false)
   setKeyboardVisiblity(false)
 }
@@ -130,7 +131,20 @@ function handleToggleAddInput(addInputVisibility, setAddInputVisiblity){
   setAddInputVisiblity(!addInputVisibility);
 }
 
-export default CustomModal
+const mapStateToProps = (state) => {
+  return {
+    lists: state.listState
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      addList: list => dispatch(listAction.addList(list))
+  }
+};
+
+export default connect(null, mapDispatchToProps)(CustomModal)
+// export default CustomModal
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -153,7 +167,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-  
+        zIndex: 1000,
       },
       separator: {
         marginVertical: 20,

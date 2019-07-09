@@ -14,18 +14,25 @@ const recipeReducer = function(state = [], action) {
       }
 }
 
-const listReducer = function(state = [], action) {
+const list = (state, action) => {
+    switch (action.type) {
+        case ACTION_TYPES.ADD_LIST:
+            return {
+                id: action.id,
+                name: action.name,
+                ingredients: [action.ingredients]
+            }
+        default: 
+            return state
+    }
+}
+
+const listReducer = (state = [], action) => {
     switch (action.type) {
         case ACTION_TYPES.ADD_LIST:
             return [
                 ...state,
-                {
-                    list: {
-                        listId: (state.length - 1) + 1,
-                        listName: action.name,
-                        ingredients: [action.ingredients]
-                    },
-                }
+                list(undefined, action)
             ]
         case ACTION_TYPES.UPDATE_LIST:
             return state.map((list, index) => {
