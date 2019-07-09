@@ -27,95 +27,99 @@ import Colors from '../constants/Colors';
 
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../config.json';
+import { green } from 'ansi-colors';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 const CustomModal = (props) => {
-    const [listArray, setListArray] = useState([]);
-    const [keyboardHeight, setKeyboardHeight] = useState(0);
-    const [isKeyboardVisible, setKeyboardVisiblity] = useState(false);
-    const [isAddInputVisible, setAddInputVisiblity] = useState(false);
-    
-    return (
-        <Modal
-          visible={props.displayModal}
-          transparent={true}
-          animationType={'slide'}
-          onRequestClose={()=>{console.log('close')}}
-      >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity
-            style={styles.modalOverlay}
-            onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}
-          />
-          <View style={isKeyboardVisible? [styles.modalBgContainer, {height: 250+keyboardHeight}] : styles.modalBgContainer}>
-            <View style={styles.modalContentContainer}>
-              <View style={styles.modalHeaderContainer}>
-                <SectionHeader title={isAddInputVisible ? 'New shopping list' : 'Save to'}/>
-                {isAddInputVisible ? 
-                  <TouchableOpacity onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}>
-                    <Icon
-                      style={styles.valueImage}
-                      name='close'
-                      size={34}
-                      color='black'
-                    />
-                  </TouchableOpacity>
-                  : 
-                  <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
-                    <Icon
-                      style={styles.valueImage}
-                      name='add'
-                      size={34}
-                      color='black'
-                    />
-                  </TouchableOpacity>
-                  }
-                
-              </View>
-              
-              <View style={[styles.separator, {marginTop: 0}]}></View>
-              {isAddInputVisible ?
-                <View style = {styles.addInputContainer}>
-                  <KeyboardListener
-                    onWillShow={(e) => {
-                      setKeyboardVisiblity(true); 
-                      setKeyboardHeight(e.endCoordinates.height)}}
-                    onWillHide={() => {
-                      setKeyboardVisiblity(false)}}
+  const [listArray, setListArray] = useState([]);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [isKeyboardVisible, setKeyboardVisiblity] = useState(false);
+  const [isAddInputVisible, setAddInputVisiblity] = useState(false);
+  
+  let cancelButton;
+  if (!isAddInputVisible){
+    cancelButton = <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
+  }
+
+  return (
+      <Modal
+        visible={props.displayModal}
+        transparent={true}
+        animationType={'slide'}
+        onRequestClose={()=>{console.log('close')}}
+    >
+      <View style={styles.modalContainer}>
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}
+        />
+        <View style={isKeyboardVisible? [styles.modalBgContainer, {height: 250+keyboardHeight}] : styles.modalBgContainer}>
+          <View style={styles.modalContentContainer}>
+            <View style={styles.modalHeaderContainer}>
+              <SectionHeader title={isAddInputVisible ? 'New shopping list' : 'Save to'}/>
+              {isAddInputVisible ? 
+                <TouchableOpacity onPress={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}>
+                  <Icon
+                    style={styles.valueImage}
+                    name='close'
+                    size={34}
+                    color='black'
                   />
-                  <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity)}/>
-                </View>  
-              :
-              listArray.length === 0 ?
-              <View style = {styles.emptyStateBox}>
-                <View style = {styles.emptyStateImage}></View>
-                <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
-              </View>
-              :
-              <View style = {styles.listContainer}>
-                <ScrollView style = {styles.listScrollView}>
-                  {listArray.map((item, id) => {
-                    return <ListThumbnail key={id} isActive={false} title={item} dishes="7" items="12" marginBottom={16}/>
-                  })}
-                </ScrollView>
-              </View>
-              }
-              {
-                isAddInputVisible ? 
-                <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
-                :
-                <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, setKeyboardVisiblity, props.closeModal)}/>
-              }
+                </TouchableOpacity>
+                : 
+                <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
+                  <Icon
+                    style={styles.valueImage}
+                    name='add'
+                    size={34}
+                    color='black'
+                  />
+                </TouchableOpacity>
+                }
             </View>
+            
+            <View style={[styles.separator, {marginTop: 0}]}></View>
+            {isAddInputVisible ?
+              <View style = {styles.addInputContainer}>
+                <KeyboardListener
+                  onWillShow={(e) => {
+                    setKeyboardVisiblity(true); 
+                    setKeyboardHeight(e.endCoordinates.height)}}
+                  onWillHide={() => {
+                    setKeyboardVisiblity(false)}}
+                />
+                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity)}/>
+                <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
+              </View>  
+            :
+            listArray.length === 0 ?
+            <View style = {styles.emptyStateBox}>
+              <View style = {styles.emptyStateImage}></View>
+              <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
+            </View>
+            :
+            <View style = {styles.listContainer}>
+              <ScrollView style = {styles.listScrollView}>
+                {listArray.map((item, id) => {
+                  return <ListThumbnail key={id} isActive={false} title={item} dishes="7" items="12" marginBottom={16}/>
+                })}
+              </ScrollView>
+            </View>
+            }
+            {cancelButton}
           </View>
         </View>
-      </Modal>
-    )
+      </View>
+    </Modal>
+  )
 }
 function handleInputSubmit(addList, text, listArray, setListArray, setAddInputVisiblity, setKeyboardVisiblity){
   // setListArray([...listArray, text])
-
-  addList(text)
+  let list = {
+    name: text,
+  }
+  console.log(list)
+  addList(list)
   setAddInputVisiblity(false)
   setKeyboardVisiblity(false)
 }
@@ -144,7 +148,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(CustomModal)
-// export default CustomModal
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -195,8 +198,6 @@ const styles = StyleSheet.create({
       addInputContainer: {
         width: '100%',
         paddingVertical: 20,
-        alignSelf: 'center',
-        alignItems: 'center',
         justifyContent: 'center',
       },
       addInput: {
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         borderRadius: 20,
         backgroundColor: 'white',
+        marginBottom: 20,
       },
       listContainer: {
         maxHeight: '80%',

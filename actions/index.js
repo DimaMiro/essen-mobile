@@ -4,6 +4,6 @@ export const addList = (list) => {
     return {
       type: ACTION_TYPES.ADD_LIST,
       id: nextId++,
-      list
+      list: list
     }
   }

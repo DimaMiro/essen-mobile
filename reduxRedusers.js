@@ -32,7 +32,12 @@ const listReducer = (state = [], action) => {
         case ACTION_TYPES.ADD_LIST:
             return [
                 ...state,
-                list(undefined, action)
+                Object.assign(
+                {
+                    id: action.id,
+                    name: action.name,
+                    ingredients: [action.ingredients]
+                }, action.list)
             ]
         case ACTION_TYPES.UPDATE_LIST:
             return state.map((list, index) => {
