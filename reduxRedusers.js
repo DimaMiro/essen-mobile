@@ -41,7 +41,7 @@ const listReducer = (state = [], action) => {
             ]
         case ACTION_TYPES.UPDATE_LIST:
             return state.map((list, index) => {
-
+                
             })
 
         default:
