@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   TextInput,
-  Keyboard,
-  Image,
-  Modal,
-  Button,
-  Platform,
-  ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import ACTION_TYPES from '../constants/ActionTypes';
 import * as listAction from '../actions'
 
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
-import ListThumbnail from '../components/ListThumbnail';
-import KeyboardListener from 'react-native-keyboard-listener';
 
 import Colors from '../constants/Colors';
 
@@ -30,9 +19,6 @@ import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 const AddListModalView = (props) => {
-    const [isAddInputVisible, setAddInputVisiblity] = useState(false);
-    const [isKeyboardVisible, setKeyboardVisiblity] = useState(false);
-    const [keyboardHeight, setKeyboardHeight] = useState(0);
     return (
         <View>
             <View style={styles.modalHeaderContainer}>
@@ -50,7 +36,7 @@ const AddListModalView = (props) => {
             <View style={[styles.separator, {marginTop: 0}]}></View>
 
             <View style = {styles.addInputContainer}>
-                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.close, setKeyboardVisiblity)}/>
+                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.close)}/>
                 <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
               </View>  
         </View>
@@ -58,14 +44,11 @@ const AddListModalView = (props) => {
     )
 }
 
-function handleInputSubmit(addList, text, closeView, setKeyboardVisiblity){
-    // setListArray([...listArray, text])
+function handleInputSubmit(addList, text, closeView){
     let list = {
         name: text,
     }
-    console.log(list)
     addList(list)
-    setKeyboardVisiblity(false)
     closeView()
 }
 
