@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import {
   Modal,
-  ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import CustomButton from '../components/CustomButton';
-import SectionHeader from '../components/SectionHeader';
-import ListThumbnail from '../components/ListThumbnail';
 import KeyboardListener from 'react-native-keyboard-listener';
 
 import AddListModalView from '../components/AddListModalView';
 import ModalEmptyStateView from '../components/ModalEmptyStateView';
+import ModalListView from '../components/ModalListView';
 
 import Colors from '../constants/Colors';
 
@@ -28,11 +24,6 @@ const CustomModal = (props) => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isAddInputVisible, setAddInputVisiblity] = useState(false);
   
-  let cancelButton;
-  if (!isAddInputVisible){
-    cancelButton = <CustomButton isPrimary={false} title="Cancel" onPressAction={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
-  }
-
   return (
       <Modal
         visible={props.displayModal}
@@ -53,46 +44,14 @@ const CustomModal = (props) => {
                   onWillShow={(e) => {
                     setKeyboardHeight(e.endCoordinates.height)}}
                 />
-                <AddListModalView close={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}/>
+                <AddListModalView close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
               </View>
             :
             listArray.length === 0 ?
-            <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}/>
+            <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             :
-            <View style = {styles.listContainer}>
-              <View style={styles.modalHeaderContainer}>
-                <SectionHeader title='Save to'/>
-                {isAddInputVisible ? 
-                  <TouchableOpacity onPress={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}>
-                    <Icon
-                      style={styles.valueImage}
-                      name='close'
-                      size={34}
-                      color='black'
-                    />
-                  </TouchableOpacity>
-                  : 
-                  <TouchableOpacity onPress={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}>
-                    <Icon
-                      style={styles.valueImage}
-                      name='add'
-                      size={34}
-                      color='black'
-                    />
-                  </TouchableOpacity>
-                  }
-              </View>
-              
-              <View style={[styles.separator, {marginTop: 0}]}></View>
-
-              <ScrollView style = {styles.listScrollView}>
-                {listArray.map((item, id) => {
-                  return <ListThumbnail key={id} isActive={false} title={item} dishes="7" items="12" marginBottom={16}/>
-                })}
-              </ScrollView>
-            </View>
+            <ModalListView listArray={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             }
-            {cancelButton}
           </View>
         </View>
       </View>
@@ -122,10 +81,6 @@ const styles = StyleSheet.create({
         flex: 0,
         backgroundColor: 'white',
       },
-      modalContentContainer: {
-        paddingHorizontal: 21,
-        paddingBottom: 50,
-      },
       modalHeaderContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -142,11 +97,4 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'rgba(0,0,0,0.4)',
       },
-      listContainer: {
-        maxHeight: '80%',
-        width: '100%',
-      },
-      listScrollView: {
-        overflow: 'visible',
-      }
 })

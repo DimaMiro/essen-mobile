@@ -20,7 +20,7 @@ const Icon = createIconSetFromFontello(fontelloConfig);
 
 const AddListModalView = (props) => {
     return (
-        <View>
+        <View style={styles.container}>
             <View style={styles.modalHeaderContainer}>
                 <SectionHeader title='New shopping list'/>
                 <TouchableOpacity onPress={() => props.close()}>
@@ -67,6 +67,10 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(null, mapDispatchToProps)(AddListModalView)
 
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 21,
+        paddingBottom: 50,
+    },
     modalHeaderContainer: {
         flexDirection: 'row',
         alignItems: 'center',

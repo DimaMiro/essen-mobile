@@ -17,7 +17,7 @@ const Icon = createIconSetFromFontello(fontelloConfig);
 
 const ModalEmptyStateView = (props) => {
     return(
-        <View>
+        <View style={styles.container}>
             <View style={styles.modalHeaderContainer}>
             <SectionHeader title='Save to'/>
                 <TouchableOpacity onPress={() => props.addList()}>
@@ -36,12 +36,17 @@ const ModalEmptyStateView = (props) => {
             <View style = {styles.emptyStateImage}></View>
             <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
             </View>
+            <CustomButton isPrimary={false} title="Cancel" onPressAction={() => props.close()}/>
         </View>
     )
 }
 export default ModalEmptyStateView
 
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 21,
+        paddingBottom: 50,
+    },
     modalHeaderContainer: {
         flexDirection: 'row',
         alignItems: 'center',
