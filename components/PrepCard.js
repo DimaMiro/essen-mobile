@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontSize: 18,
         color: Colors.accentColor,
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat"
       },
       prepDesc: {
         flex: 8,

@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     addInput: {
         textAlign: 'center',
         fontSize: 18,
-        fontFamily: "typo-grotesk",
+        fontFamily: "montserrat",
         width: '100%',
         height: 64,
         shadowColor: '#000',

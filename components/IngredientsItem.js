@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
     ingredientTitle: {
         fontSize: 18,
         color: 'black',
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat"
     },
     ingredientAmount: {
         fontSize: 18,
         color: 'rgba(0,0,0,0.4)',
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat"
     },
 })

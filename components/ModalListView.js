@@ -34,11 +34,13 @@ const ModalListView = (props) => {
           <View style={[styles.separator, {marginTop: 0}]}></View>
 
           <ScrollView style = {styles.listScrollView}>
-            {props.listArray.map((item, id) => {
-              return <ListThumbnail key={id} isActive={false} title={item} dishes="7" items="12" marginBottom={16}/>
+            {props.lists.map((item) => {
+              return <ListThumbnail key={item.id} isActive={false} title={item.name} dishes={item.dishes.length} items={item.ingredients.length} marginBottom={16}/>
             })}
           </ScrollView>
-          <CustomButton isPrimary={false} title="Cancel" onPressAction={() => props.close()}/>
+          <View style = {styles.buttonContainer}>
+            <CustomButton isPrimary={false} title="Cancel" onPressAction={() => props.close()}/>
+          </View>
         </View>
     )
 }
@@ -64,7 +66,12 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     listScrollView: {
+        maxHeight: '85%',
         paddingTop: 20,
         paddingHorizontal: 21,
+    },
+    buttonContainer: {
+      marginTop: 20,
+      paddingHorizontal: 21,
     }
 })

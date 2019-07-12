@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontSize: 17,
         color: 'rgba(0,0,0,0.6)',
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat"
     },
 })

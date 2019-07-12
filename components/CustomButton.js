@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 17,
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat",
     },
     secondaryButtonTitle: {
         color: 'black',
         textAlign: 'center',
         fontSize: 17,
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat",
     },
     primaryStyle: {
         backgroundColor: Colors.primaryButtonColor,

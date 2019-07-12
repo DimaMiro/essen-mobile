@@ -6,6 +6,8 @@ import {
   View,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import KeyboardListener from 'react-native-keyboard-listener';
 
 import AddListModalView from '../components/AddListModalView';
@@ -23,7 +25,11 @@ const CustomModal = (props) => {
   // let listArray = ['1', '2', '3']
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isAddInputVisible, setAddInputVisiblity] = useState(false);
-  
+
+  for (i=0; i<(props.lists.length); i++){
+    listArray.push(props.lists[i])
+  }
+
   return (
       <Modal
         visible={props.displayModal}
@@ -44,13 +50,13 @@ const CustomModal = (props) => {
                   onWillShow={(e) => {
                     setKeyboardHeight(e.endCoordinates.height)}}
                 />
-                <AddListModalView close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+                <AddListModalView close={() => handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}/>
               </View>
             :
             listArray.length === 0 ?
             <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             :
-            <ModalListView listArray={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+            <ModalListView lists={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             }
           </View>
         </View>
@@ -58,6 +64,7 @@ const CustomModal = (props) => {
     </Modal>
   )
 }
+
 function handleCloseModal(setAddInputVisiblity, closeModalFunction){
   setAddInputVisiblity(false)
   closeModalFunction()
@@ -66,7 +73,14 @@ function handleCloseModal(setAddInputVisiblity, closeModalFunction){
 function handleToggleAddInput(addInputVisibility, setAddInputVisiblity){
   setAddInputVisiblity(!addInputVisibility);
 }
-export default(CustomModal)
+
+const mapStateToProps = (state) => {
+  return {
+      lists: state.listState
+  }
+};
+
+export default connect (mapStateToProps) (CustomModal)
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -80,6 +94,7 @@ const styles = StyleSheet.create({
       modalBgContainer: {
         flex: 0,
         backgroundColor: 'white',
+        maxHeight: '80%',
       },
       modalHeaderContainer: {
         flexDirection: 'row',

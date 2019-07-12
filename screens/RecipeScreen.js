@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontSize: 18,
         color: 'black',
-        fontFamily: "typo-grotesk"
+        fontFamily: "montserrat"
     },
     subitle: {
         marginTop: 4,

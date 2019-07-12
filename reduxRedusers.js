@@ -36,7 +36,8 @@ const listReducer = (state = [], action) => {
                 {
                     id: action.id,
                     name: action.name,
-                    ingredients: [action.ingredients]
+                    dishes: [],
+                    ingredients: []
                 }, action.list)
             ]
         case ACTION_TYPES.UPDATE_LIST:

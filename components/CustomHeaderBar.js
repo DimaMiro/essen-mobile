@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     headerTitle: {
         color: 'white',
         fontSize: 24,
-        fontFamily: 'typo-grotesk'
+        fontFamily: 'montserrat'
     },
     headerSubtitle:{
         color: 'white',

@@ -58,7 +58,9 @@ async function loadResourcesAsync() {
       require('./assets/images/robot-prod.png'),
     ]),
     Font.loadAsync({
-      'typo-grotesk': require('./assets/fonts/Typo-Grotesk-Bold.otf'),
+      'avenir-bold': require('./assets/fonts/Avenir-Bold.otf'),
+      'avenir-demi': require('./assets/fonts/Avenir-Demi.otf'),
+      'montserrat': require('./assets/fonts/Montserrat-Regular.otf'),
       'fontello': require('./assets/fonts/fontello.ttf'),
     }),
   ]);

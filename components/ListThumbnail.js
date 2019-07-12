@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       textAlign: 'left',
       fontSize: 18,
       color: 'black',
-      fontFamily: "typo-grotesk"
+      fontFamily: "montserrat"
     },
     listSubitle: {
       marginTop: 4,
