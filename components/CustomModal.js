@@ -22,7 +22,6 @@ const Icon = createIconSetFromFontello(fontelloConfig);
 
 const CustomModal = (props) => {
   let listArray = []
-  // let listArray = ['1', '2', '3']
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isAddInputVisible, setAddInputVisiblity] = useState(false);
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { withNavigation } from 'react-navigation';
-import { View, TouchableHighlight, Text, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 
 function DishScrollItem(props){
     return (
-        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe', {recipe: props.dish})}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Recipe', {recipe: props.dish})}>
             <View style={styles.dishScrollItemContainerOuter}>
                 <View style={styles.dishScrollItemContainerInner}>
                     <Image style={styles.dishImage} source={{uri: props.dish["image-url"]}}></Image>
@@ -13,7 +13,7 @@ function DishScrollItem(props){
                     </View>
                 </View>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         
     );
 };

@@ -34,8 +34,9 @@ const ModalListView = (props) => {
           <View style={[styles.separator, {marginTop: 0}]}></View>
 
           <ScrollView style = {styles.listScrollView}>
-            {props.lists.map((item) => {
-              return <ListThumbnail key={item.id} isActive={false} title={item.name} dishes={item.dishes.length} items={item.ingredients.length} marginBottom={16}/>
+            {props.lists.map((list) => {
+              // console.log(list)
+              return <ListThumbnail key={list.id} onPressAction={()=>{}} isActive={false} list={list} marginBottom={16}/>
             })}
           </ScrollView>
           <View style = {styles.buttonContainer}>
@@ -66,8 +67,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     listScrollView: {
-        maxHeight: '85%',
-        paddingTop: 20,
+        maxHeight: '80%',
+        paddingVertical: 20,
         paddingHorizontal: 21,
     },
     buttonContainer: {

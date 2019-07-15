@@ -1,12 +1,12 @@
 import React from "react";
-import { View, TouchableHighlight, Image, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
 import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
 
 function RecipeThumbnailView(props){
     
     return (
-        <TouchableHighlight onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
             <View style={[styles.recipeContainerOuter, {marginBottom: props.marginBottom}]}>
                 <View style={styles.recipeContainerInner}>
                     <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>
@@ -23,7 +23,7 @@ function RecipeThumbnailView(props){
                     </View>
                 </View>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         
     );
 };

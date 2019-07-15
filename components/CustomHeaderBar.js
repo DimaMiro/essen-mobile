@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "react-navigation";
 import { withNavigation } from 'react-navigation';
-import { View, Button, Text, TouchableHighlight, Platform, StyleSheet } from "react-native";
+import { View, Button, Text, TouchableOpacity, Platform, StyleSheet } from "react-native";
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
@@ -9,14 +9,14 @@ const Icon = createIconSetFromFontello(fontelloConfig);
  function CustomHeaderBar(props){
      let backButton;
      if (!props.isRoot){
-        backButton = <TouchableHighlight onPress={() => {props.navigation.goBack()}}>
+        backButton = <TouchableOpacity onPress={() => {props.navigation.goBack()}}>
              <Icon
                 style = {styles.backButton}
                 name="back"
                 size={30}
                 color="white"
             />
-         </TouchableHighlight>
+         </TouchableOpacity>
      }
     return (
         <View style={styles.headerView}>

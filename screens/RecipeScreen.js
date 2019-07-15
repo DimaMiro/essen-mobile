@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import {
   Image,
-  Modal,
-  Button,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  TouchableHighlight,
   View,
 } from 'react-native';
-
-// import { connect } from 'react-redux';
-// import store from './store';
-// import { Provider } from 'react-redux';
-// import ACTION_TYPES from './constants/ActionTypes';
 
 import ValueItem from '../components/ValueItem';
 import CustomButton from '../components/CustomButton';
@@ -34,7 +24,7 @@ const RecipeScreen = (props) => {
   let recipe = props.navigation.state.params.recipe
   return (
     <View style={styles.bgContainer}>
-      <CustomModal displayModal={isModalVisible} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
+      <CustomModal recipe={recipe} displayModal={isModalVisible} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>

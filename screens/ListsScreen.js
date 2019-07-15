@@ -1,28 +1,58 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+
+import { connect } from 'react-redux';
 
 import SectionHeader from '../components/SectionHeader';
 import ListThumbnail from '../components/ListThumbnail';
+import CustomModal from '../components/CustomModal';
 
-export default function ListsScreen() {
-  let activeLists = []
-  let inactiveLists = []
+const ListsScreen = (props) => {
+  // let activeLists = []
+  let listArray = []
+
+  const [isModalVisible, setModalVisiblity] = useState(false);
+
+  for (i=0; i<(props.lists.length); i++){
+    listArray.push(props.lists[i])
+  }
+
+  const displayedLists = listArray.map(list => {
+    return <ListThumbnail key={list.id} isActive={false} title={list.name} dishes={list.dishes.length} items={list.ingredients.length} marginBottom={16}/>
+  })
+
   return (
     <View style={styles.bgContainer}>
+      <CustomModal displayModal={isModalVisible} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <SectionHeader title="Active Lists"/>
-        <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/>
-        <SectionHeader title="Inactive lists (n)"/>
-        <ListThumbnail isActive={false} title="Weekend's shopping" dishes="7" items="12" marginBottom={16}/>
-        <ListThumbnail isActive={false} title="Weekend's shopping" dishes="7" items="12" marginBottom={16}/>
-        <ListThumbnail isActive={false} title="Weekend's shopping" dishes="7" items="12" marginBottom={16}/>
+        {/* <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/> */}
+        <SectionHeader title={`Inactive lists (${listArray.length})`}/>
+        {displayedLists}
       </ScrollView>
     </View>
     
   );
 }
+
+function handleOpenModal(setModalVisiblity) {
+  setModalVisiblity(true);
+}
+
+function handleCloseModal(setModalVisiblity) {
+  setModalVisiblity(false);
+}
+
+const mapStateToProps = (state) => {
+  return {
+      lists: state.listState
+  }
+};
+
+export default connect (mapStateToProps) (ListsScreen)
+
 const styles = StyleSheet.create({
   bgContainer: {
     flex: 1,

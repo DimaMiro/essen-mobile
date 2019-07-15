@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 
 import SectionHeader from '../components/SectionHeader';
 import ListThumbnail from '../components/ListThumbnail';
@@ -30,7 +31,8 @@ const DiscoverScreen = (props) => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
           <SectionHeader title="Active Lists"/>
-          <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/>
+          
+          {/* <ListThumbnail onPressAction={() => props.navigation.navigate('SingleList')} isActive={true}/> */}
           <SectionHeader title="Recipe of the Day"/>
           {recipeOfTheDay}
           <SectionHeader title="Trending"/>
