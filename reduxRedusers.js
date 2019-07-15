@@ -20,8 +20,16 @@ const recipeReducer = function(state = [], action) {
 //             return {
 //                 id: action.id,
 //                 name: action.name,
-//                 ingredients: [action.ingredients]
+//                 dishes: [],
+//                 ingredients: {}
 //             }
+//         case ACTION_TYPES.UPDATE_LIST:
+//             return Object.assign(
+//                 {id: action.id,
+//                     name: action.name,
+//                     dishes: [],
+//                     ingredients: {}
+//                 })
 //         default: 
 //             return state
 //     }
@@ -33,19 +41,41 @@ const listReducer = (state = [], action) => {
             return [
                 ...state,
                 Object.assign(
-                {
-                    id: action.id,
+                {id: action.id,
                     name: action.name,
                     dishes: [],
                     ingredients: {}
-                }, action.list)
+                }, action.payload)
+                // list(undefined,action)
             ]
         case ACTION_TYPES.UPDATE_LIST:
-            return state.map((list) => {
-                if (action.name = list.name){
-                    return Object.assign({}, state, action.list)
-                }
-            })
+            return state.map(list=>{
+                    if (list.id === action.payload.id) {
+                        return action.payload
+                    }
+                    return list
+                })
+            // return state.map(list=>{
+            //         if (list.id === action.id) {
+            //             Object.assign({}, state, action.list)
+                        
+            //         }
+            //     })
+            // return state.map((list) => {
+            //     if (action.id == list.id) {
+            //         return {
+            //             ...list,
+            //             ...action.list
+            //         }
+            //     }
+                
+
+            //     // console.log(l)
+            //     // if (action.list.name == list.name){
+            //     //     // return Object.assign({}, state, action.list)
+            //         // list(l,action)
+            //     // }
+            // })
 
         default:
           return state

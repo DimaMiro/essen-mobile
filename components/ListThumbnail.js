@@ -46,17 +46,17 @@ function ListThumbnail(props){
     } else if (list.dishes.length < 3) {
       dishImageContainerLayout = (
       <View style={styles.dishImageContainerHalf}>
-          {list.dishes.map((dish, index) => {
-            return <Image key={index} style={styles.dishImage} source={{uri: dish.imageurl}}></Image>
+          {list.dishes.map((dish) => {
+            return <Image key={dish.id} style={styles.dishImage} source={{uri: dish['image-url']}}></Image>
           })}
       </View>
       )
     } else {
       dishImageContainerLayout = (
       <View style={styles.dishImageContainerFull}>
-          <Image style={styles.dishImage} source={{uri: list.dishes[0].imageurl}}></Image>
-          <Image style={styles.dishImage} source={{uri: list.dishes[1].imageurl}}></Image>
-          <Image style={styles.dishImage} source={{uri: list.dishes[2].imageurl}}></Image>
+          <Image style={styles.dishImage} source={{uri: list.dishes[0]['image-url']}}></Image>
+          <Image style={styles.dishImage} source={{uri: list.dishes[1]['image-url']}}></Image>
+          <Image style={styles.dishImage} source={{uri: list.dishes[2]['image-url']}}></Image>
       </View>
       )
     }

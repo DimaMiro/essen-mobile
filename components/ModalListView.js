@@ -50,10 +50,8 @@ const ModalListView = (props) => {
 }
 
 function handleSelectList(recipe, list, updateList, close){
-  console.log(list)
   list.dishes.push(recipe)
   list.ingredients = Object.assign(recipe.ingredients, list.ingredients)
-  // console.log(list)
   updateList(list)
   close()
 }
