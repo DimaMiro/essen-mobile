@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
+// import * as listAction from '../actions'
 
 import KeyboardListener from 'react-native-keyboard-listener';
 
@@ -55,7 +56,7 @@ const CustomModal = (props) => {
             listArray.length === 0 ?
             <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             :
-            <ModalListView lists={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+            <ModalListView recipe={props.recipe} lists={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
             }
           </View>
         </View>
@@ -78,8 +79,13 @@ const mapStateToProps = (state) => {
       lists: state.listState
   }
 };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       updateList: list => dispatch(listAction.updateList(list))
+//   }
+// };
 
-export default connect (mapStateToProps) (CustomModal)
+export default connect (mapStateToProps)(CustomModal)
 
 const styles = StyleSheet.create({
     modalContainer: {

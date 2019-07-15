@@ -6,6 +6,9 @@ import {
   View,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as listAction from '../actions'
+
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
 import ListThumbnail from '../components/ListThumbnail';
@@ -36,7 +39,7 @@ const ModalListView = (props) => {
           <ScrollView style = {styles.listScrollView}>
             {props.lists.map((list) => {
               // console.log(list)
-              return <ListThumbnail key={list.id} onPressAction={()=>{}} isActive={false} list={list} marginBottom={16}/>
+              return <ListThumbnail key={list.id} onPressAction={()=>handleSelectList(props.recipe, list, props.updateList, props.close)} isActive={false} list={list} marginBottom={16}/>
             })}
           </ScrollView>
           <View style = {styles.buttonContainer}>
@@ -46,7 +49,22 @@ const ModalListView = (props) => {
     )
 }
 
-export default ModalListView
+function handleSelectList(recipe, list, updateList, close){
+  console.log(list)
+  list.dishes.push(recipe)
+  list.ingredients = Object.assign(recipe.ingredients, list.ingredients)
+  // console.log(list)
+  updateList(list)
+  close()
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      updateList: list => dispatch(listAction.updateList(list))
+  }
+};
+
+export default connect (null, mapDispatchToProps) (ModalListView)
 
 const styles = StyleSheet.create({
     modalHeaderContainer: {

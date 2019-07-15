@@ -14,18 +14,18 @@ const recipeReducer = function(state = [], action) {
       }
 }
 
-const list = (state, action) => {
-    switch (action.type) {
-        case ACTION_TYPES.ADD_LIST:
-            return {
-                id: action.id,
-                name: action.name,
-                ingredients: [action.ingredients]
-            }
-        default: 
-            return state
-    }
-}
+// const list = (state, action) => {
+//     switch (action.type) {
+//         case ACTION_TYPES.ADD_LIST:
+//             return {
+//                 id: action.id,
+//                 name: action.name,
+//                 ingredients: [action.ingredients]
+//             }
+//         default: 
+//             return state
+//     }
+// }
 
 const listReducer = (state = [], action) => {
     switch (action.type) {
@@ -37,12 +37,14 @@ const listReducer = (state = [], action) => {
                     id: action.id,
                     name: action.name,
                     dishes: [],
-                    ingredients: []
+                    ingredients: {}
                 }, action.list)
             ]
         case ACTION_TYPES.UPDATE_LIST:
-            return state.map((list, index) => {
-                
+            return state.map((list) => {
+                if (action.name = list.name){
+                    return Object.assign({}, state, action.list)
+                }
             })
 
         default:
