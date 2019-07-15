@@ -49,7 +49,7 @@ const CustomModal = (props) => {
                   onWillShow={(e) => {
                     setKeyboardHeight(e.endCoordinates.height)}}
                 />
-                <AddListModalView close={() => handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)}/>
+                <AddListModalView hide={() => handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
               </View>
             :
             listArray.length === 0 ?

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import SectionHeader from '../components/SectionHeader';
 import ListThumbnail from '../components/ListThumbnail';
 import CustomModal from '../components/CustomModal';
+import CustomButton from '../components/CustomButton';
 
 const ListsScreen = (props) => {
   // let activeLists = []
@@ -18,7 +19,7 @@ const ListsScreen = (props) => {
   }
 
   const displayedLists = listArray.map(list => {
-    return <ListThumbnail key={list.id} isActive={false} title={list.name} dishes={list.dishes.length} items={list.ingredients.length} marginBottom={16}/>
+    return <ListThumbnail key={list.id} isActive={false} list={list} marginBottom={16}/>
   })
 
   return (
@@ -27,6 +28,7 @@ const ListsScreen = (props) => {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
+        <CustomButton isPrimary={true} title="Add new List" onPressAction={()=>handleOpenModal(setModalVisiblity)}/>
         <SectionHeader title="Active Lists"/>
         {/* <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/> */}
         <SectionHeader title={`Inactive lists (${listArray.length})`}/>

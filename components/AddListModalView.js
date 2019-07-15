@@ -36,7 +36,7 @@ const AddListModalView = (props) => {
             <View style={[styles.separator, {marginTop: 0}]}></View>
 
             <View style = {styles.addInputContainer}>
-                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.close)}/>
+                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.hide)}/>
                 <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
               </View>  
         </View>
@@ -44,12 +44,12 @@ const AddListModalView = (props) => {
     )
 }
 
-function handleInputSubmit(addList, text, closeView){
+function handleInputSubmit(addList, text, hide){
     let list = {
         name: text,
     }
     addList(list)
-    closeView()
+    hide()
 }
 
 const mapStateToProps = (state) => {
