@@ -24,7 +24,7 @@ const ListsScreen = (props) => {
 
   return (
     <View style={styles.bgContainer}>
-      <CustomModal displayModal={isModalVisible} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
+      <CustomModal displayModal={isModalVisible} isEnterFromAddList={true} closeModal={()=>handleCloseModal(setModalVisiblity)}/>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   contentContainer: {
+    paddingTop: 21,
     paddingHorizontal: 21,
   },
 });

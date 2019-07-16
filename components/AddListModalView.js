@@ -52,12 +52,6 @@ function handleInputSubmit(addList, text, hide){
     hide()
 }
 
-const mapStateToProps = (state) => {
-    return {
-        lists: state.listState
-    }
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
         addList: list => dispatch(listAction.addList(list))

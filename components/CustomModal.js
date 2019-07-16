@@ -25,6 +25,7 @@ const CustomModal = (props) => {
   let listArray = []
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isAddInputVisible, setAddInputVisiblity] = useState(false);
+  
 
   for (i=0; i<(props.lists.length); i++){
     listArray.push(props.lists[i])
@@ -42,23 +43,33 @@ const CustomModal = (props) => {
           style={styles.modalOverlay}
           onPress={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}
         />
-        <View style={isAddInputVisible? [styles.modalBgContainer, {height: 250+keyboardHeight}] : styles.modalBgContainer}>
-          <View style={styles.modalContentContainer}>
-            {isAddInputVisible ?
-              <View>
-                <KeyboardListener
-                  onWillShow={(e) => {
-                    setKeyboardHeight(e.endCoordinates.height)}}
-                />
-                <AddListModalView hide={() => handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
-              </View>
-            :
-            listArray.length === 0 ?
-            <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
-            :
-            <ModalListView recipe={props.recipe} lists={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
-            }
-          </View>
+        <View style={isAddInputVisible || props.isEnterFromAddList ? [styles.modalBgContainer, {height: 250+keyboardHeight}] : styles.modalBgContainer}>
+          {props.isEnterFromAddList ?
+            <View style={styles.modalContentContainer}>
+              <KeyboardListener
+                onWillShow={(e) => {
+                  setKeyboardHeight(e.endCoordinates.height)}}
+              />
+              <AddListModalView hide={() => handleCloseModal(setAddInputVisiblity, props.closeModal)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+            </View>
+          :
+            <View style={styles.modalContentContainer}>
+              {isAddInputVisible ?
+                <View>
+                  <KeyboardListener
+                    onWillShow={(e) => {
+                      setKeyboardHeight(e.endCoordinates.height)}}
+                  />
+                  <AddListModalView hide={() => handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+                </View>
+              :
+              listArray.length === 0 ?
+              <ModalEmptyStateView addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+              :
+              <ModalListView recipe={props.recipe} lists={listArray} addList={()=>handleToggleAddInput(isAddInputVisible, setAddInputVisiblity)} close={() => handleCloseModal(setAddInputVisiblity, props.closeModal)}/>
+              }
+            </View>
+          }
         </View>
       </View>
     </Modal>
@@ -79,12 +90,6 @@ const mapStateToProps = (state) => {
       lists: state.listState
   }
 };
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//       updateList: list => dispatch(listAction.updateList(list))
-//   }
-// };
-
 export default connect (mapStateToProps)(CustomModal)
 
 const styles = StyleSheet.create({
