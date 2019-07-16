@@ -67,6 +67,12 @@ const ListsStack = createStackNavigator(
         header: () => <CustomHeaderBar isRoot={false} title="List" subtitle="Your daily inspirations of recipe"/>
       }
     },
+    Recipe: {
+      screen: RecipeScreen,
+      navigationOptions: {
+        header: () => <CustomHeaderBar isRoot={false} title="Recipe" subtitle="Your daily inspirations of recipe"/>
+      }
+    },
   },
   {
     initialRouteName: 'Lists',
