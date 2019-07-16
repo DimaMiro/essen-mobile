@@ -13,7 +13,6 @@ import SingleListScreen from '../screens/SingleListScreen';
 
 import CustomHeaderBar from "../components/CustomHeaderBar";
 import Colors from '../constants/Colors';
-// import { defaultProps } from 'recompose';
 
 const DiscoverStack = createStackNavigator({
     Discover: {

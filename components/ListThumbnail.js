@@ -1,36 +1,10 @@
 import React from "react";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import Colors from '../constants/Colors';
+import { withNavigation } from 'react-navigation';
 
 function ListThumbnail(props){
 
-    // const list = {
-    //   id: 0,
-    //   name: "Fdfd",
-    //   dishes: [
-    //     {
-    //       name: "First",
-    //       id: 1,
-    //       imageurl: "https://firebasestorage.googleapis.com/v0/b/essen-653ac.appspot.com/o/recipe-photos%2F1.jpg?alt=media&token=9422a275-b7f7-405d-8136-4387807dce90",
-    //     },
-    //     {
-    //       name: "Second",
-    //       id: 2,
-    //       imageurl: "https://firebasestorage.googleapis.com/v0/b/essen-653ac.appspot.com/o/recipe-photos%2F2.jpg?alt=media&token=c4055d89-44cf-401d-9fd2-774d4641ff69",
-    //     },
-    //     {
-    //       name: "Third",
-    //       id: 3,
-    //       imageurl: "https://firebasestorage.googleapis.com/v0/b/essen-653ac.appspot.com/o/recipe-photos%2F3.jpg?alt=media&token=9a5c69ae-d7bc-42a6-9e17-4ad595ea6360",
-    //     },
-    //     {
-    //       name: "Fourth",
-    //       id: 4,
-    //       imageurl: "https://firebasestorage.googleapis.com/v0/b/essen-653ac.appspot.com/o/recipe-photos%2F4.jpg?alt=media&token=044141cd-f15b-49b5-bbdc-11fb92fffe7c",
-    //     },
-    //   ],
-    //   ingredients: []
-    // }
     const list = props.list
 
     let listBg
@@ -62,7 +36,7 @@ function ListThumbnail(props){
     }
 
     return (
-      <TouchableOpacity onPress={props.onPressAction}>
+      <TouchableOpacity onPress={(props.onPressAction!==undefined?props.onPressAction:() => handleNavigateToList(list,props.navigation))}>
         <View style={[styles.listContainerOuter, {marginBottom: props.marginBottom}]}>
             <View style={[styles.listContainerInner, {backgroundColor: listBg}]}>
                 <View style={styles.listTitleContainer}>
@@ -75,7 +49,11 @@ function ListThumbnail(props){
       </TouchableOpacity>
     );
 };
-export default ListThumbnail
+
+function handleNavigateToList(list, navigation){
+  navigation.navigate('SingleList', {list: list})
+}
+export default withNavigation(ListThumbnail)
 
 const styles = StyleSheet.create({
     listContainerOuter: {

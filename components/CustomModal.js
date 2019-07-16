@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-// import * as listAction from '../actions'
 
 import KeyboardListener from 'react-native-keyboard-listener';
 

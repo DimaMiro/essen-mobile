@@ -4,7 +4,6 @@ import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
 
 function RecipeThumbnailView(props){
-    
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
             <View style={[styles.recipeContainerOuter, {marginBottom: props.marginBottom}]}>

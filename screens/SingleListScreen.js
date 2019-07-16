@@ -3,16 +3,19 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 
 import SectionHeader from '../components/SectionHeader';
 import DishesScrollView from '../components/DishesScrollView';
+import IngredientsStack from '../components/IngredientsStack';
 
-export default function SingleListScreen() {
+export default function SingleListScreen(props) {
+  let list = props.navigation.state.params.list
     return (
         <View style={styles.bgContainer}>
             <ScrollView
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}>
-                <SectionHeader title="Dishes (n)"/>
-                <SectionHeader title="Items (n)"/>
-                
+                <SectionHeader title={`Dishes (${list.dishes.length})`}/>
+                <DishesScrollView dishes={list.dishes}/>
+                <SectionHeader title={`Ingredients (${Object.keys(list.ingredients).length})`}/>
+                <IngredientsStack ingredients={list.ingredients}/>
             </ScrollView>
         </View>
         
