@@ -1,5 +1,4 @@
 import React from 'react';
-// import { View, Text, Platform } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,

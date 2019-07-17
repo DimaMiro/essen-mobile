@@ -6,6 +6,8 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig";
 
+import {AsyncStorage} from 'react-native';
+
 import store from './store';
 import { Provider } from 'react-redux';
 import ACTION_TYPES from './constants/ActionTypes';
@@ -37,6 +39,19 @@ export default function App(props) {
   }
 }
 
+async function fetchLists() {
+  let lists = [];
+  try {
+    lists = await AsyncStorage.getItem('lists') || 'none';
+    if (lists !== null) {
+      console.log(lists);
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+
 async function fetchRecipes() {
   await firebase.database().ref('recipes').once('value', function (snapshot) {
       Object.entries(snapshot.val()).map(([key, value]) => 
@@ -52,6 +67,7 @@ async function loadResourcesAsync() {
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   
   await Promise.all([
+    fetchLists(),
     fetchRecipes(),
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
