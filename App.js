@@ -7,12 +7,14 @@ import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig";
 
 import {AsyncStorage} from 'react-native';
+import {loadState} from './localStorage';
 
 import store from './store';
 import { Provider } from 'react-redux';
 import ACTION_TYPES from './constants/ActionTypes';
 
 import AppNavigator from './navigation/AppNavigator';
+if(__DEV__) {import('./reactotronConfig')}
 
 
 export default function App(props) {
@@ -39,18 +41,6 @@ export default function App(props) {
   }
 }
 
-async function fetchLists() {
-  let lists = [];
-  try {
-    lists = await AsyncStorage.getItem('lists') || 'none';
-    if (lists !== null) {
-      console.log(lists);
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
 
 async function fetchRecipes() {
   await firebase.database().ref('recipes').once('value', function (snapshot) {
@@ -65,9 +55,7 @@ async function fetchRecipes() {
 
 async function loadResourcesAsync() {
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-  
   await Promise.all([
-    fetchLists(),
     fetchRecipes(),
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import * as listAction from '../actions'
+import * as listAction from '../actions/actions'
 
 import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';

@@ -1,10 +1,10 @@
 import ACTION_TYPES from '../constants/ActionTypes';
-let nextId = 0
+import uuid from "uuid"
 export const addList = (list) => {
   return {
     type: ACTION_TYPES.ADD_LIST,
     payload: {
-      id: nextId++,
+      id: uuid.v4(),
       ...list
     }
   }
