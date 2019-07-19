@@ -13,6 +13,7 @@ import CustomButton from '../components/CustomButton';
 import SectionHeader from '../components/SectionHeader';
 import IngredientsStack from '../components/IngredientsStack';
 import PrepStack from '../components/PrepStack';
+import CacheImage from '../components/CacheImage';
 
 import CustomModal from '../components/CustomModal';
 
@@ -30,9 +31,8 @@ const RecipeScreen = (props) => {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-          {/* <Image style={styles.dishImage} source={{uri: recipe["image-url"]}}></Image> */}
           <View style={styles.dishImageBox} >
-              <Image
+              <CacheImage
                   style={styles.dishImage}
                   source={{uri: recipe["image-url"]}}
                   onLoad={()=>handleImageOnLoad(setImageLoadingState)} />
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  
+
   dishImageBox: {
     flex: 1,
     height: 375,

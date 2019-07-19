@@ -22,6 +22,7 @@
     "expo": "^33.0.0",
     "expo-asset": "^5.0.0",
     "expo-constants": "^5.0.0",
+    "expo-file-system": "~5.0.1",
     "expo-font": "^5.0.0",
     "expo-web-browser": "^5.0.0",
     "firebase": "^6.2.2",
@@ -34,6 +35,7 @@
     "react-navigation": "^3.11.0",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
+    "shorthash": "^0.0.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

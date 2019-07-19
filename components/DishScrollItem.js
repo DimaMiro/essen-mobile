@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withNavigation } from 'react-navigation';
 import { View, TouchableOpacity, Text, Image, ActivityIndicator, StyleSheet } from "react-native";
 import Colors from '../constants/Colors'
+import CacheImage from '../components/CacheImage';
 
 function DishScrollItem(props){
     const [isLoaded, setImageLoadingState] = useState(false);
@@ -10,7 +11,7 @@ function DishScrollItem(props){
             <View style={styles.dishScrollItemContainerOuter}>
                 <View style={styles.dishScrollItemContainerInner}>
                     <View style={styles.dishImageBox} > 
-                        <Image 
+                        <CacheImage 
                             style={styles.dishImage} 
                             source={{uri: props.dish["image-url"]}}
                             onLoad={()=>handleImageOnLoad(setImageLoadingState)} />

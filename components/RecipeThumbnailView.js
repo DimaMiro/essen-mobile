@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Image, Text, ActivityIndicator, StyleSheet } fr
 import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
 import Colors from '../constants/Colors'
+import CacheImage from '../components/CacheImage';
 
 function RecipeThumbnailView(props){
     const [isLoaded, setImageLoadingState] = useState(false);
@@ -12,7 +13,7 @@ function RecipeThumbnailView(props){
             <View style={[styles.recipeContainerOuter, {marginBottom: props.marginBottom}]}>
                 <View style={styles.recipeContainerInner}>
                     <View style={styles.dishImageBox} >
-                        <Image
+                        <CacheImage
                             style={styles.dishImage}
                             source={{uri: props.recipe["image-url"]}}
                             onLoad={()=>handleImageOnLoad(setImageLoadingState)} />
