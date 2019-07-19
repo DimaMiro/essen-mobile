@@ -2,6 +2,7 @@ import React from "react";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import Colors from '../constants/Colors';
 import { withNavigation } from 'react-navigation';
+import CacheImage from '../components/CacheImage';
 
 function ListThumbnail(props){
 
@@ -21,16 +22,16 @@ function ListThumbnail(props){
       dishImageContainerLayout = (
       <View style={styles.dishImageContainerHalf}>
           {list.dishes.map((dish) => {
-            return <Image key={dish.id} style={styles.dishImage} source={{uri: dish['image-url']}}></Image>
+            return <CacheImage key={dish.id} style={styles.dishImage} source={{uri: dish['image-url']}}/>
           })}
       </View>
       )
     } else {
       dishImageContainerLayout = (
       <View style={styles.dishImageContainerFull}>
-          <Image style={styles.dishImage} source={{uri: list.dishes[0]['image-url']}}></Image>
-          <Image style={styles.dishImage} source={{uri: list.dishes[1]['image-url']}}></Image>
-          <Image style={styles.dishImage} source={{uri: list.dishes[2]['image-url']}}></Image>
+          <CacheImage style={styles.dishImage} source={{uri: list.dishes[0]['image-url']}}/>
+          <CacheImage style={styles.dishImage} source={{uri: list.dishes[1]['image-url']}}/>
+          <CacheImage style={styles.dishImage} source={{uri: list.dishes[2]['image-url']}}/>
       </View>
       )
     }
