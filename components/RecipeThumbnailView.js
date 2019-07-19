@@ -1,14 +1,28 @@
-import React from "react";
-import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, TouchableOpacity, Image, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { withNavigation } from 'react-navigation';
 import ValueItem from './ValueItem';
+import Colors from '../constants/Colors'
 
 function RecipeThumbnailView(props){
+    const [isLoaded, setImageLoadingState] = useState(false);
+
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Recipe', {recipe: props.recipe})}>
             <View style={[styles.recipeContainerOuter, {marginBottom: props.marginBottom}]}>
                 <View style={styles.recipeContainerInner}>
-                    <Image style={styles.dishImage} source={{uri: props.recipe["image-url"]}}></Image>
+                    <View style={styles.dishImageBox} >
+                        <Image
+                            style={styles.dishImage}
+                            source={{uri: props.recipe["image-url"]}}
+                            onLoad={()=>handleImageOnLoad(setImageLoadingState)} />
+                        {!isLoaded &&
+                            <View style={styles.dishLoadingImageContainer}>
+                                <ActivityIndicator size="large" color={Colors.tintColor}/>
+                            </View>
+                        }
+                    </View>
+                    
                     <View style={styles.descContainer}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>{props.recipe.name}</Text>
@@ -26,6 +40,9 @@ function RecipeThumbnailView(props){
         
     );
 };
+function handleImageOnLoad(setImageLoadingState) {
+    setImageLoadingState(true)
+}
 export default withNavigation(RecipeThumbnailView)
 
 const styles = StyleSheet.create({
@@ -43,10 +60,20 @@ const styles = StyleSheet.create({
         
         backgroundColor: 'white',
     },
-    dishImage: {
+    dishImageBox: {
         flex: 1,
         height: 333,
-        backgroundColor: 'gray',
+    },
+    dishImage: {
+        flex: 1,
+    },
+    dishLoadingImageContainer: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     descContainer: {
         flex: 1,

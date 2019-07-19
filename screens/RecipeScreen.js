@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator
 } from 'react-native';
 
 import ValueItem from '../components/ValueItem';
@@ -20,6 +21,7 @@ import Colors from '../constants/Colors';
 const RecipeScreen = (props) => {
   
   const [isModalVisible, setModalVisiblity] = useState(false);
+  const [isLoaded, setImageLoadingState] = useState(false);
 
   let recipe = props.navigation.state.params.recipe
   return (
@@ -28,7 +30,18 @@ const RecipeScreen = (props) => {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-          <Image style={styles.dishImage} source={{uri: recipe["image-url"]}}></Image>
+          {/* <Image style={styles.dishImage} source={{uri: recipe["image-url"]}}></Image> */}
+          <View style={styles.dishImageBox} >
+              <Image
+                  style={styles.dishImage}
+                  source={{uri: recipe["image-url"]}}
+                  onLoad={()=>handleImageOnLoad(setImageLoadingState)} />
+              {!isLoaded &&
+                  <View style={styles.dishLoadingImageContainer}>
+                      <ActivityIndicator size="large" color={Colors.tintColor}/>
+                  </View>
+              }
+          </View>
           <View style={styles.descContainer}>
               <View style={styles.valuesContainer}>
                 <ValueItem iconName="time" value={recipe.info["cook-time"]} unit="min"/>
@@ -61,59 +74,74 @@ function handleCloseModal(setModalVisiblity) {
   setModalVisiblity(false);
 }
 
+function handleImageOnLoad(setImageLoadingState) {
+  setImageLoadingState(true)
+}
+
 export default RecipeScreen
 
 const styles = StyleSheet.create({
-    bgContainer: {
+  bgContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  container: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  
+  dishImageBox: {
+    flex: 1,
+    height: 375,
+    marginHorizontal: -21,
+  },
+  dishImage: {
       flex: 1,
-      backgroundColor: 'black',
-    },
-    container: {
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      flex: 1,
+  },
+  dishLoadingImageContainer: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
       backgroundColor: 'white',
-    },
-    dishImage: {
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  contentContainer: {
+    paddingHorizontal: 21,
+  },
+  descContainer: {
+    flex: 1,
+    paddingTop: 16,
+  },
+  valuesContainer: {
+    flex: 1,
+    flexDirection: "row",
+    marginTop: 10,
+    paddingHorizontal: 5,
+    justifyContent: "space-between"
+  },
+  separator: {
+    marginVertical: 20,
+    backgroundColor: Colors.tabIconDefault,
+    height: 1,
+  },
+  titleContainer: {
       flex: 1,
-      height: 375,
-      backgroundColor: 'gray',
-      marginHorizontal: -21,
-    },
-    contentContainer: {
-      paddingHorizontal: 21,
-    },
-    descContainer: {
-      flex: 1,
-      paddingTop: 16,
-    },
-    valuesContainer: {
-      flex: 1,
-      flexDirection: "row",
-      marginTop: 10,
-      paddingHorizontal: 5,
-      justifyContent: "space-between"
-    },
-    separator: {
-      marginVertical: 20,
-      backgroundColor: Colors.tabIconDefault,
-      height: 1,
-    },
-    titleContainer: {
-        flex: 1,
-    },
-    title: {
-        textAlign: 'left',
-        fontSize: 18,
-        color: 'black',
-        fontFamily: "montserrat"
-    },
-    subitle: {
-        marginTop: 4,
-        textAlign: 'left',
-        fontSize: 13,
-        color: 'rgba(0,0,0,0.4)',
-    },
-  });
+  },
+  title: {
+      textAlign: 'left',
+      fontSize: 18,
+      color: 'black',
+      fontFamily: "montserrat"
+  },
+  subitle: {
+      marginTop: 4,
+      textAlign: 'left',
+      fontSize: 13,
+      color: 'rgba(0,0,0,0.4)',
+  },
+});
