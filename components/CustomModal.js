@@ -75,6 +75,7 @@ const CustomModal = (props) => {
   )
 }
 
+
 function handleCloseModal(setAddInputVisiblity, closeModalFunction){
   setAddInputVisiblity(false)
   closeModalFunction()

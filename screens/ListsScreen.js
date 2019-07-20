@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
+import * as listAction from '../actions/actions'
 
 import SectionHeader from '../components/SectionHeader';
 import ListThumbnail from '../components/ListThumbnail';
@@ -19,7 +20,7 @@ const ListsScreen = (props) => {
   }
 
   const displayedLists = listArray.map(list => {
-    return <ListThumbnail key={list.id} isSwipeDisable={false} isActive={false} list={list} marginBottom={16}/>
+    return <ListThumbnail key={list.id} isSwipeDisable={false} isActive={false} list={list} delete={() => handleDeleteList(props.deleteList, list.id)} marginBottom={16}/>
   })
 
   return (
@@ -47,13 +48,23 @@ function handleCloseModal(setModalVisiblity) {
   setModalVisiblity(false);
 }
 
+function handleDeleteList(deleteList,id) {
+  deleteList(id)
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      deleteList: id => dispatch(listAction.deleteList(id))
+  }
+};
+
 const mapStateToProps = (state) => {
   return {
       lists: state.listState
   }
 };
 
-export default connect (mapStateToProps) (ListsScreen)
+export default connect (mapStateToProps,mapDispatchToProps) (ListsScreen)
 
 const styles = StyleSheet.create({
   bgContainer: {

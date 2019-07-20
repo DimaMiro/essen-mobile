@@ -16,3 +16,10 @@ export const updateList = (list) => {
     payload: list
   }
 }
+
+export const deleteList = (id) => {
+  return {
+    type: ACTION_TYPES.DELETE_LIST,
+    payload: id
+  }
+}

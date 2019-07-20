@@ -28,11 +28,14 @@ const listReducer = (state = [], action) => {
             ]
         case ACTION_TYPES.UPDATE_LIST:
             return state.map(list=>{
-                    if (list.id === action.payload.id) {
-                        return action.payload
-                    }
-                    return list
-                })
+                if (list.id === action.payload.id) {
+                    return action.payload
+                }
+                return list
+            })
+        case ACTION_TYPES.DELETE_LIST:
+                const newState = state.filter(list => list.id !== action.payload );
+                return newState;
         default:
           return state
       }

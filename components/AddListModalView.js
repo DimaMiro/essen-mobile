@@ -40,7 +40,6 @@ const AddListModalView = (props) => {
                 <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
               </View>  
         </View>
-        
     )
 }
 

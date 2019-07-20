@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import Colors from '../constants/Colors';
 import { withNavigation } from 'react-navigation';
@@ -9,7 +9,6 @@ import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 function ListThumbnail(props){
-    const [isOptionsVisible, setOptionsVisiblity] = useState(false);
     const list = props.list
 
     let listBg
@@ -41,7 +40,7 @@ function ListThumbnail(props){
     }
 
     const rightButton = [
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => props.delete()}>
         <View style={[styles.deleteButtonContainer, {marginBottom: props.marginBottom}]}>
           <View style={styles.deleteButton}>
             <Icon
