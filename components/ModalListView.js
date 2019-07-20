@@ -38,7 +38,7 @@ const ModalListView = (props) => {
 
           <ScrollView style = {styles.listScrollView}>
             {props.lists.map((list) => {
-              return <ListThumbnail key={list.id} onPressAction={()=>handleSelectList(props.recipe, list, props.updateList, props.close)} isActive={false} list={list} marginBottom={16}/>
+              return <ListThumbnail key={list.id} onPressAction={()=>handleSelectList(props.recipe, list, props.updateList, props.close)} isSwipeDisable={true} isActive={false} list={list} marginBottom={16}/>
             })}
           </ScrollView>
           <View style = {styles.buttonContainer}>

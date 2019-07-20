@@ -19,7 +19,7 @@ const ListsScreen = (props) => {
   }
 
   const displayedLists = listArray.map(list => {
-    return <ListThumbnail key={list.id} isActive={false} list={list} marginBottom={16}/>
+    return <ListThumbnail key={list.id} isSwipeDisable={false} isActive={false} list={list} marginBottom={16}/>
   })
 
   return (

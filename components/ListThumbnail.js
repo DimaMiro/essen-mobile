@@ -1,11 +1,15 @@
-import React from "react";
-import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import Colors from '../constants/Colors';
 import { withNavigation } from 'react-navigation';
 import CacheImage from '../components/CacheImage';
+import Swipeable from 'react-native-swipeable-row'
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../config.json';
+const Icon = createIconSetFromFontello(fontelloConfig);
 
 function ListThumbnail(props){
-
+    const [isOptionsVisible, setOptionsVisiblity] = useState(false);
     const list = props.list
 
     let listBg
@@ -36,20 +40,40 @@ function ListThumbnail(props){
       )
     }
 
-    return (
-      <TouchableOpacity onPress={(props.onPressAction!==undefined?props.onPressAction:() => handleNavigateToList(list,props.navigation))}>
-        <View style={[styles.listContainerOuter, {marginBottom: props.marginBottom}]}>
-            <View style={[styles.listContainerInner, {backgroundColor: listBg}]}>
-                <View style={styles.listTitleContainer}>
-                    <Text style={styles.listTitle}>{list.name}</Text>
-                    <Text style={styles.listSubitle}>{list.dishes.length} dishes · {Object.keys(list.ingredients).length} ingredients</Text>
-                </View>
-                {dishImageContainerLayout}
-            </View>
+    const rightButton = [
+      <TouchableOpacity>
+        <View style={[styles.deleteButtonContainer, {marginBottom: props.marginBottom}]}>
+          <View style={styles.deleteButton}>
+            <Icon
+                  name='close'
+                  size={34}
+                  color='white'
+              />
+          </View>
         </View>
       </TouchableOpacity>
+    ]
+
+    return (
+      <Swipeable 
+        disable={props.isSwipeDisable} 
+        rightButtons={rightButton} 
+        rightButtonWidth={121}>
+        <TouchableOpacity onPress={(props.onPressAction!==undefined?props.onPressAction:() => handleNavigateToList(list,props.navigation))}>
+          <View style={[styles.listContainerOuter, {marginBottom: props.marginBottom}]}>
+              <View style={[styles.listContainerInner, {backgroundColor: listBg}]}>
+                  <View style={styles.listTitleContainer}>
+                      <Text style={styles.listTitle}>{list.name}</Text>
+                      <Text style={styles.listSubitle}>{list.dishes.length} dishes · {Object.keys(list.ingredients).length} ingredients</Text>
+                  </View>
+                  {dishImageContainerLayout}
+              </View>
+          </View>
+        </TouchableOpacity>
+      </Swipeable>
     );
 };
+
 
 function handleNavigateToList(list, navigation){
   navigation.navigate('SingleList', {list: list})
@@ -96,7 +120,6 @@ const styles = StyleSheet.create({
       flexBasis: "55%",
       flexDirection: 'row-reverse',
     },
-
     dishImage: {
         marginRight: 8,
         borderRadius: 10,
@@ -104,4 +127,21 @@ const styles = StyleSheet.create({
         height: 68,
         backgroundColor: 'gray',
     },
+    deleteButtonContainer: {
+      marginLeft: 21,
+      marginRight: 21,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 20,
+    },
+    deleteButton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: Colors.errorBackground,
+      width: 100,
+      height: '100%',
+      overflow: 'hidden',
+      borderRadius: 20,
+    } 
 })

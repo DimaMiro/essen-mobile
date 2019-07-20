@@ -8,7 +8,7 @@ export default {
   tabIconDefault: '#D8D8D8',
   tabIconSelected: tintColor,
   tabBar: '#FAFAFA',
-  errorBackground: 'red',
+  errorBackground: '#ED2D2A',
   errorText: '#fff',
   warningBackground: '#EAEB5E',
   warningText: '#666804',
