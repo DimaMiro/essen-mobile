@@ -15,7 +15,7 @@ export default function SingleListScreen(props) {
                 <SectionHeader title={`Dishes (${list.dishes.length})`}/>
                 <DishesScrollView dishes={list.dishes}/>
                 <SectionHeader title={`Ingredients (${Object.keys(list.ingredients).length})`}/>
-                <IngredientsStack ingredients={list.ingredients}/>
+                <IngredientsStack ingredients={list.ingredients} isCheckable={true}/>
             </ScrollView>
         </View>
         

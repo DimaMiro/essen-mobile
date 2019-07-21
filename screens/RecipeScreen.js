@@ -57,7 +57,7 @@ const RecipeScreen = (props) => {
               <CustomButton isPrimary={true} title="Add to Shopping List" onPressAction={()=>handleOpenModal(setModalVisiblity)}/>
               <View style={styles.separator}></View>
               <SectionHeader title="Ingredients"/>
-              <IngredientsStack ingredients={recipe.ingredients}/>
+              <IngredientsStack ingredients={recipe.ingredients} isCheckable={false}/>
               <View style={styles.separator}></View>
               <SectionHeader title="Preparation"/>
               <PrepStack preparation={recipe.preparation}/>

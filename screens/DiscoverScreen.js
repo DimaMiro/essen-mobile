@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 
 import SectionHeader from '../components/SectionHeader';
-import ListThumbnail from '../components/ListThumbnail';
 import RecipeThumbnailView from '../components/RecipeThumbnailView';
 import DishesScrollView from '../components/DishesScrollView';
 
@@ -30,9 +29,6 @@ const DiscoverScreen = (props) => {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-          <SectionHeader title="Active Lists"/>
-          
-          {/* <ListThumbnail onPressAction={() => props.navigation.navigate('SingleList')} isActive={true}/> */}
           <SectionHeader title="Recipe of the Day"/>
           {recipeOfTheDay}
           <SectionHeader title="Trending"/>

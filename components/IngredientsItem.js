@@ -1,10 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import CheckBox from './CheckBox'
 
 export default function IngredientsStack(props){
     return (
         <View style={styles.ingredientContainer}>
-            <Text style={styles.ingredientTitle}>{props.title}</Text>
+            <View style={styles.titleContainer}>
+                {props.isCheckable && <CheckBox isChecked={false}/>}
+                <Text style={props.isCheckable ? [styles.ingredientTitle, {marginLeft: 8}] : styles.ingredientTitle}>{props.title}</Text>
+            </View>
             <Text style={styles.ingredientAmount}>{props.amount}</Text>
         </View>
     );
@@ -17,10 +21,15 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingVertical: 10,
     },
+    titleContainer: {
+        flexDirection: "row",
+        alignItems: 'center',
+    },
     ingredientTitle: {
         fontSize: 18,
         color: 'black',
-        fontFamily: "montserrat"
+        fontFamily: "montserrat",
+        textAlign: 'left'
     },
     ingredientAmount: {
         fontSize: 18,

@@ -10,7 +10,6 @@ import CustomModal from '../components/CustomModal';
 import CustomButton from '../components/CustomButton';
 
 const ListsScreen = (props) => {
-  // let activeLists = []
   let listArray = []
 
   const [isModalVisible, setModalVisiblity] = useState(false);
@@ -30,9 +29,7 @@ const ListsScreen = (props) => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <CustomButton isPrimary={true} title="Add new List" onPressAction={()=>handleOpenModal(setModalVisiblity)}/>
-        <SectionHeader title="Active Lists"/>
-        {/* <ListThumbnail isActive={true} title="Weekend's shopping" dishes="7" items="12"/> */}
-        <SectionHeader title={`Inactive lists (${listArray.length})`}/>
+        <SectionHeader title={`All lists (${listArray.length})`}/>
         {displayedLists}
       </ScrollView>
     </View>
