@@ -8,7 +8,7 @@ const Icon = createIconSetFromFontello(fontelloConfig);
 export default function CheckBox (props) {
     const [isChecked, setCheck] = useState(props.isChecked);
     return(
-        <TouchableOpacity style={styles.checkboxContainer} onPress={()=>toggleCheckbox(isChecked, setCheck)}>
+        <TouchableOpacity style={styles.checkboxContainer} onPress={()=>toggleCheckbox(props.handler, isChecked, setCheck)}>
             {isChecked?
             <View style={styles.checked}>
                 <Icon
@@ -23,8 +23,9 @@ export default function CheckBox (props) {
         </TouchableOpacity>
     )
 }
-function toggleCheckbox(isChecked, setCheck){
+function toggleCheckbox(handler, isChecked, setCheck){
     setCheck(!isChecked)
+    handler(!isChecked)
 }
 
 const styles = StyleSheet.create({

@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CheckBox from './CheckBox'
 
-export default function IngredientsStack(props){
+export default function IngredientsItem(props){
     return (
         <View style={styles.ingredientContainer}>
             <View style={styles.titleContainer}>
-                {props.isCheckable && <CheckBox isChecked={false}/>}
-                <Text style={props.isCheckable ? [styles.ingredientTitle, {marginLeft: 8}] : styles.ingredientTitle}>{props.title}</Text>
+                {props.isCheckboxVisible && <CheckBox handler={props.handler} isChecked={props.isChecked}/>}
+                <Text style={props.isCheckboxVisible ? [styles.ingredientTitle, {marginLeft: 8}] : styles.ingredientTitle}>{props.title}</Text>
             </View>
             <Text style={styles.ingredientAmount}>{props.amount}</Text>
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     ingredientContainer: {

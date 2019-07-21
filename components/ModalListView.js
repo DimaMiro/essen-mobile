@@ -50,7 +50,11 @@ const ModalListView = (props) => {
 
 function handleSelectList(recipe, list, updateList, close){
   list.dishes.push(recipe)
-  list.ingredients = Object.assign(recipe.ingredients, list.ingredients)
+  let ingredients = recipe.ingredients
+  Object.keys(ingredients).map(function(key) {
+    ingredients[key] = {...ingredients[key], isChecked: false};
+  });
+  list.ingredients = Object.assign(ingredients, list.ingredients)
   updateList(list)
   close()
 }

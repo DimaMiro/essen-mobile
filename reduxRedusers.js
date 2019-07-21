@@ -19,8 +19,8 @@ const listReducer = (state = [], action) => {
         case ACTION_TYPES.ADD_LIST:
             return [
                 ...state,
-                Object.assign(
-                {id: action.id,
+                Object.assign({
+                    id: action.id,
                     name: action.name,
                     dishes: [],
                     ingredients: {}
