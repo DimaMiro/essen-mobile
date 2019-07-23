@@ -1,5 +1,5 @@
 # Essen
-This is my first try with React Native. Application has been created with using of Expo SDK. Recipes database has been stored in Firebase. Lists database has been synchronized with Redux store and then with Local storage.
+This is my first try with React Native. The application has been created using Expo SDK. Recipes database has been stored in Firebase. Lists database has been synchronized with Redux store and then with Local storage.
 
 ## Screenshots
 ![essen-screen](https://user-images.githubusercontent.com/15017363/61711590-af373600-ad54-11e9-89f4-16ec6025f33a.png)
