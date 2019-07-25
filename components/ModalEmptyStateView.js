@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
+    Image,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
 import CustomButton from '../components/CustomButton';
@@ -33,7 +34,7 @@ const ModalEmptyStateView = (props) => {
             <View style={[styles.separator, {marginTop: 0}]}></View>
 
             <View style = {styles.emptyStateBox}>
-            <View style = {styles.emptyStateImage}></View>
+            <Image style = {styles.emptyStateImage} source={require('../assets/images/empty-pic.png')}></Image>
             <Text style = {styles.paragraph}>Seems you haven’t created any lists yet.{"\n"}Let’s add your first one!</Text>
             </View>
             <CustomButton isPrimary={false} title="Cancel" onPressAction={() => props.close()}/>
@@ -69,7 +70,6 @@ const styles = StyleSheet.create({
         width: 160,
         height: 160,
         marginBottom: 20,
-        backgroundColor: Colors.tabIconDefault
     },
     paragraph: {
         textAlign: 'center',
