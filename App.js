@@ -60,6 +60,7 @@ async function loadResourcesAsync() {
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
       require('./assets/images/robot-prod.png'),
+      require('./assets/images/empty-pic.png'),
     ]),
     Font.loadAsync({
       'avenir-bold': require('./assets/fonts/Avenir-Bold.otf'),
