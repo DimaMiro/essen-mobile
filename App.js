@@ -6,9 +6,6 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig";
 
-import {AsyncStorage} from 'react-native';
-import {loadState} from './localStorage';
-
 import store from './store';
 import { Provider } from 'react-redux';
 import ACTION_TYPES from './constants/ActionTypes';
