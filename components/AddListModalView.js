@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TextInput,
   StyleSheet,
@@ -19,6 +19,7 @@ import fontelloConfig from '../config.json';
 const Icon = createIconSetFromFontello(fontelloConfig);
 
 const AddListModalView = (props) => {
+    const [text, setText] = useState('')
     return (
         <View style={styles.container}>
             <View style={styles.modalHeaderContainer}>
@@ -36,8 +37,8 @@ const AddListModalView = (props) => {
             <View style={[styles.separator, {marginTop: 0}]}></View>
 
             <View style = {styles.addInputContainer}>
-                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.hide)}/>
-                <CustomButton isPrimary={true} title="Create" onPressAction={() => {}}/>
+                <TextInput style = {styles.addInput} autoFocus = {true} placeholder = "Enter new list name" onChangeText={(text)=>{setText(text)}} onSubmitEditing={(event)=>handleInputSubmit(props.addList, event.nativeEvent.text, props.hide)}/>
+                <CustomButton isPrimary={true} title="Create" onPressAction={()=>handleInputSubmit(props.addList, text, props.hide)}/>
               </View>  
         </View>
     )
